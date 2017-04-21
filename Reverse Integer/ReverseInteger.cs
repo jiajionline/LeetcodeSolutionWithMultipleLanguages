@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeetcodePracticeCsharpVersion
 {
@@ -24,7 +20,7 @@ namespace LeetcodePracticeCsharpVersion
 
             if(value > int.MaxValue)
             {
-                return 0;
+                return int.MaxValue;
             }
 
             int ret = (int)value;
