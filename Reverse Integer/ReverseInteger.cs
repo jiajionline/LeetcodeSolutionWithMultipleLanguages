@@ -20,7 +20,7 @@ namespace LeetcodePracticeCsharpVersion
 
             if(value > int.MaxValue)
             {
-                return int.MaxValue;
+                return 0;
             }
 
             int ret = (int)value;
