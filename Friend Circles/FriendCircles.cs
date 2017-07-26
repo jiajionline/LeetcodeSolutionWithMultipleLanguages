@@ -24,11 +24,11 @@ namespace LeetcodePracticeCsharpVersion
         }
         
 
-        private void DepthFirstSearch(int[,] M, bool[] visited, int i)
+        private void DepthFirstSearch(int[,] M, bool[] visited, int current)
         {
-            for(int j = 0; j < M.GetLength(1); j++)
+            for(int j = 0; j < M.GetLength(current); j++)
             {
-                if(M[i,j] == 1 && visited[j] == false)
+                if(M[current,j] == 1 && visited[j] == false)
                 {
                         visited[j] = true;
                         DepthFirstSearch(M, visited, j);
