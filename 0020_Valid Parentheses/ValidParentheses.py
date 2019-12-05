@@ -1,5 +1,4 @@
-
-class ValidParentheses(object):
+class Solution(object):
     def isValid(self,s):
         if s is None or len(s) % 2 != 0:
             return False

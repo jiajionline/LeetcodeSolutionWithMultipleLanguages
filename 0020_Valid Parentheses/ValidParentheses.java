@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ValidParentheses {
+public class Solution {
     public boolean isValid(String s) {
         if(s == null || s.length() % 2 != 0) return false;
         Stack<Character> stack = new Stack<Character>();
