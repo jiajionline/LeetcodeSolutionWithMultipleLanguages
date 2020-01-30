@@ -42,7 +42,7 @@ namespace LeetcodePracticeCsharpVersion
                     sb.Append('1');
                 }else if(k == 2)
                 {
-                    sb.Append('1');
+                    sb.Append('0');
                     carry = true;
                 }
             }
