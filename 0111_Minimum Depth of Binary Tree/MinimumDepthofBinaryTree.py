@@ -1,4 +1,4 @@
-class MinimumDepthofBinaryTree(object):
+class Solution(object):
     def minDepth(self, root):
         if root is None:
             return 0
