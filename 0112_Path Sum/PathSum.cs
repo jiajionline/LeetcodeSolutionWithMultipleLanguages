@@ -1,18 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿public class Solution {
+   public bool HasPathSum(TreeNode root, int sum) {
+       if(root == null) return false;
+        var queue = new Queue<Tuple<TreeNode,int>>();
+        queue.Enqueue(new Tuple<TreeNode,int>(root, root.val));
 
-namespace LeetcodePracticeCsharpVersion
-{
-    class PathSum
-    {
-        public bool HasPathSum(TreeNode root, int sum)
+        while(queue.Count()>0)
         {
-            if (root == null) return false;
-            if (root.left == null && root.right == null && root.val == sum) return true;
-            return HasPathSum(root.left, sum - root.val) || HasPathSum(root.right, sum - root.val);
-        }        
-    }
+            var tmp = queue.Dequeue();
+            var tmpNode = tmp.Item1;
+            var tmpValue = tmp.Item2;
+            if(tmpNode.left == null && tmpNode.right == null)
+            {
+                if(tmpValue == sum)
+                    return true;
+            }
+
+            if(tmpNode.left!=null)
+            {
+                queue.Enqueue(new Tuple<TreeNode,int>(tmpNode.left, tmpValue + tmpNode.left.val));
+            }
+
+            if(tmpNode.right!=null)
+            {
+                queue.Enqueue(new Tuple<TreeNode,int>(tmpNode.right, tmpValue + tmpNode.right.val));
+            }
+        }
+      
+       return false;
+   }
 }
