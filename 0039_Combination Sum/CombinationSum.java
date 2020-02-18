@@ -16,6 +16,7 @@ class Solution {
 
         for(int i=s;i<candidates.length;i++){
             if(candidates[i] > target) break;
+            if (i > s && candidates[i] == candidates[i-1]) continue;
             cur.add(candidates[i]);
             DFS(candidates, target - candidates[i], i, cur, ans);
             cur.remove(cur.size()-1);
