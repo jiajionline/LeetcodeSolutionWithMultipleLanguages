@@ -1,6 +1,4 @@
-from ListNode import ListNode 
-
-class MergeTwoSortedLists(object):
+class Solution(object):
     def mergeTwoLists(self, l1, l2):
         if l1 is None:
             return l2
@@ -13,14 +11,7 @@ class MergeTwoSortedLists(object):
         p2 = l2
         
         while p1 is not None and p2 is not None:
-            if p1.val == p2.val:
-                current.next = p1
-                current = p1
-                p1 = p1.next
-                current.next = p2
-                current = p2
-                p2 = p2.next
-            elif p1.val < p2.val:
+            if p1.val < p2.val:
                 current.next = p1
                 current = p1
                 p1 = p1.next
