@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class InvertBinaryTree {
+class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root == null) return root;
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
