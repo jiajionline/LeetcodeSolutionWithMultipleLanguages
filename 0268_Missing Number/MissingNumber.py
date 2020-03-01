@@ -1,4 +1,4 @@
-class MissingNumber(object):
+class Solution(object):
     def missingNumber(self, nums):
         ret = 0
         for i in range(0,len(nums)):
