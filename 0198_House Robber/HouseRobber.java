@@ -8,7 +8,7 @@ class Solution {
         int previous = nums[0];
         int current = Math.max(nums[0],nums[1]);
         
-        for(int i=2;i<nums.length;i++){
+        for(int i=2;i<n;i++){
             int next = Math.max(current, previous + nums[i]);
             previous = current;
             current = next;
