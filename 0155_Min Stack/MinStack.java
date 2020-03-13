@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 public class MinStack {
 
 	private Stack<Integer> stack = new Stack<Integer>();
