@@ -1,5 +1,5 @@
 
-public class PlusOne {
+public class Solution {
     public int[] plusOne(int[] digits) {
         if(digits == null || digits.length == 0){
         	int[] zeroArray = new int[0];
