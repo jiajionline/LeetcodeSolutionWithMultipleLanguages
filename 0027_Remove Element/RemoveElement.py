@@ -1,4 +1,4 @@
-class RemoveElement(object):
+class Solution(object):
     def removeElement(self, nums, val):
         if nums is None or len(nums) == 0:
             return 0

@@ -1,5 +1,5 @@
 
-public class RemoveElement {
+public class Solution {
     public int removeElement(int[] nums, int val) {
         if(nums == null || nums.length == 0) return 0;
         int currentIndex = -1;
