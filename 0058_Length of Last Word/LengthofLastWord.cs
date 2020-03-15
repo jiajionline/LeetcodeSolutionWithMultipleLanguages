@@ -6,7 +6,7 @@ public class Solution {
            end--;
        }    
 
-       var begin = end - 1;
+       var begin = end;
        while(begin >=0 && s[begin]!=' '){
            begin--;
        }
