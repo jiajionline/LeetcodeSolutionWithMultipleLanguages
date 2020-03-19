@@ -1,4 +1,4 @@
-class ContainsDuplicate(object):
+class Solution(object):
     def containsDuplicate(self, nums):
         hashset = set()
         for i in nums:
