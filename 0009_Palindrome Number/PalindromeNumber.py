@@ -1,6 +1,4 @@
-import sys
-
-class PalindromeNumber(object):
+class Solution(object):
     def isPalindrome(self, x):
         if x == (-sys.maxsize - 1):
             return False

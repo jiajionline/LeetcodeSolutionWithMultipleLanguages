@@ -1,5 +1,5 @@
 
-public class PalindromeNumber {
+public class Solution {
     public boolean isPalindrome(int x) {
         if(x == Integer.MIN_VALUE) return false;
         long y = Math.abs(x);
