@@ -1,6 +1,4 @@
-import java.util.*;
-
-public class FindAllNumbersDisappearedinanArray {
+public class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> ret = new LinkedList<Integer>();
         if(nums == null || nums.length == 0) return ret;

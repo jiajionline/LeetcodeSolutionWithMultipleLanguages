@@ -1,4 +1,4 @@
-class FindAllNumbersDisappearedinanArray(object):
+class Solution(object):
     def findDisappearedNumbers(self, nums):
         ret = list()
         if nums is None or len(nums)==0:
