@@ -1,4 +1,4 @@
-class ReverseInteger(object):
+class Solution(object):
         
     def reverse(self, x):                
         isNegative = x < 0
