@@ -1,4 +1,4 @@
-class MoveZeroes(object):
+class Solution(object):
     def moveZeroes(self, nums):
         if(nums is None or len(nums) <=1):
             return

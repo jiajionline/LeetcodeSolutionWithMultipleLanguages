@@ -1,5 +1,5 @@
 
-public class MoveZeroes {
+public class Solution {
     public void moveZeroes(int[] nums) {
         if(nums == null || nums.length <=1) return;
         int copyIndex = 0;
