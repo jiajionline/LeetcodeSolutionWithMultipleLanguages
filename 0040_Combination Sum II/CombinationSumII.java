@@ -1,10 +1,9 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        List<Integer> curr = new ArrayList<Integer>();
         
         Arrays.sort(candidates);
-        DFS(candidates, target, 0, curr, ans);
+        DFS(candidates, target, 0, new ArrayList<Integer>(), ans);
         return ans;
         
     }
@@ -14,8 +13,7 @@ class Solution {
                 ans.add(new ArrayList<Integer>(curr));
                 return;
             }
-        
-        
+               
         for(int i=s;i<candidates.length;i++){
              
             if(candidates[i] > target) break;
@@ -25,7 +23,5 @@ class Solution {
             DFS(candidates, target - candidates[i], i+1, curr, ans);
             curr.remove(curr.size()-1);
         }
-        
-        
     }
 }
