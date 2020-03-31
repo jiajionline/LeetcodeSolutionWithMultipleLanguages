@@ -1,10 +1,9 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        List<Integer> cur = new ArrayList<Integer>();
 
         for(int n=0;n<=nums.length;n++){
-            DFS(nums, 0,n,cur,ans);
+            DFS(nums, 0,n,new ArrayList<Integer>(),ans);
         }
 
         return ans;
