@@ -1,4 +1,4 @@
-class AddStrings(object):
+class Solution(object):
     def addStrings(self,num1,num2):
         if num1 is None or len(num1) == 0:
             return num2
@@ -12,13 +12,13 @@ class AddStrings(object):
             value = 0
             value += carry
             if(index1>=0):
-                value += num1[index1] - '0'
+                value += (ord(num1[index1]) - ord('0'))
                 index1 -=1
             if(index2>=0):
-                value += num2[index2] - '0'
+                value += (ord(num2[index2]) - ord('0'))
                 index2 -=1
             carry = value / 10
             value %= 10
             ret.append(value)
-        ret.reverse()        
-        return str(ret)
+        ret.reverse() 
+        return "".join([str(i) for i in ret])
