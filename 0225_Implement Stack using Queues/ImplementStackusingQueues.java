@@ -1,12 +1,9 @@
-import java.util.Queue;
-import java.util.LinkedList;
-
-public class ImplementStackusingQueues {
+public class MyStack {
 
 	private Queue<Integer> current = new LinkedList<Integer>();
 	private Queue<Integer> backup = new LinkedList<Integer>();
     /** Initialize your data structure here. */
-    public ImplementStackusingQueues() {
+    public MyStack() {
         
     }
     
