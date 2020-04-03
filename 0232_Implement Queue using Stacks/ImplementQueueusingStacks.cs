@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LeetcodePracticeCsharpVersion
-{
-    class ImplementQueueusingStacks
+﻿    class MyQueue
     {
         private Stack<int> enqueueStack = new Stack<int>();
         private Stack<int> dequeueStack = new Stack<int>();

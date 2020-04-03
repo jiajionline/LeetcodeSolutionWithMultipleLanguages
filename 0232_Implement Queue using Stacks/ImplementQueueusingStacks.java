@@ -1,5 +1,4 @@
-import java.util.*;
-public class ImplementQueueusingStacks {
+public class MyQueue {
     
 	private Stack<Integer> enqueueStack = new Stack<Integer>();
 	private Stack<Integer> dequeueStack = new Stack<Integer>();

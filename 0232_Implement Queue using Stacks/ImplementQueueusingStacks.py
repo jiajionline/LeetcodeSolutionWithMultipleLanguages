@@ -1,4 +1,4 @@
-class ImplementQueueusingStacks(object):
+class MyQueue(object):
     def __init__(self):
         self.enqueueStack = list()
         self.dequeueStack = list()
