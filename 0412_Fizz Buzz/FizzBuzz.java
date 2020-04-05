@@ -1,5 +1,4 @@
-import java.util.*;
-public class FizzBuzz {
+public class Solution {
     public List<String> fizzBuzz(int n) {
     	List<String> retList = new LinkedList<String>();
     	

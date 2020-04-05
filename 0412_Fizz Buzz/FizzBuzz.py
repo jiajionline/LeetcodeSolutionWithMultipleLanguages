@@ -1,4 +1,4 @@
-class FizzBuzz(object):
+class Solution(object):
     def fizzBuzz(self, n):
         retList = list()
         for i in range(1,n+1):
