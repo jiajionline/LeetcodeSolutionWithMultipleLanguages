@@ -1,4 +1,4 @@
-class DetectCaptical(object):
+class Solution(object):
     def detectCapitalUse(self, word):
         if word is None or len(word) == 0:
             return False

@@ -1,5 +1,5 @@
 
-public class DetectCaptical {
+public class Solution {
     public boolean detectCapitalUse(String word)
     {
         if (word == null || word.length() == 0) return false;
