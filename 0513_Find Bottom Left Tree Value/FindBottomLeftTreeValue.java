@@ -1,6 +1,4 @@
-import java.util.*;
-
-public class FindBottomLeftTreeValue {
+public class Solution {
     public int findBottomLeftValue(TreeNode root) {
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         queue.addLast(root);
