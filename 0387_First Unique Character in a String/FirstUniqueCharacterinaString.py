@@ -1,4 +1,4 @@
-class FirstUniqueChar(object):
+class Solution(object):
     def firstUniqChar(self, s):
         if s is None or len(s)==0:
             return -1
