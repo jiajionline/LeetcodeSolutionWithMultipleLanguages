@@ -1,4 +1,4 @@
-class FindLargestValueinEachTreeRow(object):
+class Solution(object):
     def largestValues(self, root):
         currentLargestValueDict = dict()
         self.DFS(root,1,currentLargestValueDict)
