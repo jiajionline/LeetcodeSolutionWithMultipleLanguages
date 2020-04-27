@@ -8,7 +8,7 @@ public class UnionFindSet{
 
         for(int i=0;i<parents.length;i++){
             parents[i] = i;
-            ranks[i] = i;
+            ranks[i] = 1;
         }
     }
 
