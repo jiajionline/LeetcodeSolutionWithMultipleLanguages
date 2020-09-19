@@ -1,15 +1,12 @@
-
-public class ReverseString {
-    public String reverseString(String s) {
-        if(s==null || s.length() <=1) return s;
-        char[] charArray = s.toCharArray();
-        
-        for(int i=0;i<charArray.length/2;i++){
-        	char temp = charArray[charArray.length - 1-i];
-        	charArray[charArray.length - 1 -i] = charArray[i];
-        	charArray[i] = temp;
+class Solution {
+    public void reverseString(char[] s) {
+        if( s== null || s.length <=1) return;
+        int start = 0;
+        int end = s.length -1;
+        while(start < end){
+            char tmp = s[start];
+            s[start++] = s[end];
+            s[end--] = tmp;
         }
-        
-        return new String(charArray);
     }
 }
