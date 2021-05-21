@@ -16,6 +16,7 @@ class TimeMap {
         if (!M.containsKey(key)) return "";
 
         TreeMap<Integer, String> tree = M.get(key);
+        //The floorKey() method is used to return the greatest key less than or equal to given key from the parameter.
         Integer t = tree.floorKey(timestamp);
         return t != null ? tree.get(t) : "";
     }

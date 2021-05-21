@@ -8,7 +8,6 @@ class Data {
 }
 public class TimeMap {
 
-    /** Initialize your data structure here. */
     Map<String, List<Data>> map;
     public TimeMap() {
         map = new HashMap<String, List<Data>>();
@@ -25,16 +24,15 @@ public class TimeMap {
     }
     
     protected String binarySearch(List<Data> list, int time) {
-        int low = 0, high = list.size() - 1;
+        int low = 0, high = list.size() ;
         while (low < high) {
             int mid = (high - low)/2 + low;
-            if (list.get(mid).time == time) return list.get(mid).val;
-            if (list.get(mid).time < time) {
-                if (list.get(mid+1).time > time) return list.get(mid).val;
+            if (list.get(mid).time <= time) {
                 low = mid + 1;
             }
-            else high = mid -1;
+            else high = mid;
         }
-        return list.get(low).time <= time ? list.get(low).val : "";
+        
+        return (high == 0) ? "" : list.get(high-1).val;
     }
 }
