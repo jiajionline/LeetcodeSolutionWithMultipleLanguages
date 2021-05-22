@@ -4,7 +4,8 @@ public class Solution
     {
         if (nums == null || nums.Length == 0) return -1;
         int l = 0, r = nums.Length - 1;
-        while (l < r)
+        //[l,r]
+        while (l <= r)
         {
             var m = (r - l) / 2 + l;
             if (nums[m] == target) return m;
@@ -31,8 +32,8 @@ public class Solution
                 }
             }
         }
-
-        return target == nums[l] ? l : -1;
-
+ 
+        return  -1;
+ 
     }
 }
