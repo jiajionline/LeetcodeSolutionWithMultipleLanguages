@@ -14,6 +14,8 @@ class Solution {
     		}
     	}
     	
+        Collections.sort(result);
+
     	return result;
     }
     
