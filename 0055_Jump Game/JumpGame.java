@@ -15,6 +15,6 @@ class Solution {
             }
         }
         
-        return furthestPos >= nums.length;
+        return furthestPos >= nums.length-1;
     }
 }
