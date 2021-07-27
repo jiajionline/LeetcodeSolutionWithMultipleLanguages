@@ -1,39 +1,38 @@
-public class Solution
+public class Solution {
+    public IList<IList<string>> Partition(string s) {
+        var ans = new List<IList<string>>();
+        if(string.IsNullOrEmpty(s)) return ans;
+        
+        DFS(s, 0, new List<string>(), ans);
+        return ans;
+        
+    }
+    
+    private void DFS(string s, int index, IList<string> curr, IList<IList<string>> ans)
     {
-        public IList<IList<string>> Partition(string s)
+        if(s.Length == index)
         {
-            var ans = new List<IList<string>>();
-            if (string.IsNullOrWhiteSpace(s)) return ans;
-            BackTracking(ans, new List<string>(), s, 0);
-            return ans;
+            ans.Add(new List<string>(curr));
+            return;
         }
-
-        private void BackTracking(IList<IList<string>> ans, IList<string> list, string str, int s)
+        
+        for(int i = index;i<s.Length;i++)
         {
-            if (s == str.Length)
-            {
-                ans.Add(new List<string>(list));
-                return;
+            if(IsPalindrome(s, index, i)){
+                curr.Add(s.Substring(index, i - index + 1));
+                DFS(s, i+1, curr, ans);
+                curr.RemoveAt(curr.Count - 1);
             }
-
-            for (int i = s; i < str.Length; i++)
-            {
-                if (IsPalindrome(str, s, i))
-                {
-                    list.Add(str.Substring(s, i - s + 1));
-                    BackTracking(ans, list, str, i + 1);
-                    list.RemoveAt(list.Count - 1);
-                }
-            }
-        }
-
-        private bool IsPalindrome(string s, int start, int end)
-        {
-            while (start < end)
-            {
-                if (s[start++] != s[end--]) return false;
-            }
-
-            return true;
         }
     }
+    
+    private bool IsPalindrome(string str, int s, int e)
+    {
+        while(s < e)
+        {
+            if(str[s++] != str[e--]) return false;
+        }
+        
+        return true;
+    }
+}
