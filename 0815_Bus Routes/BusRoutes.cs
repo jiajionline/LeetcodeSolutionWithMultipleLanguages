@@ -11,8 +11,6 @@ public class Solution {
                 graph[s].Add(i);
             }
         }
-        // key is stop, value is route
-        var dict = new Dictionary<int, int>();
         // check if the route processed or not
         var visited = new HashSet<int>();
         
