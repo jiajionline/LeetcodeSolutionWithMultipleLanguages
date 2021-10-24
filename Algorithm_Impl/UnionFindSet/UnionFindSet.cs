@@ -32,7 +32,7 @@ public class UnionFindSet{
             parents[rootN1] = rootN2;
         else {
             parents[rootN1] = rootN2;
-            ranks[rootN1] += 1;
+            ranks[rootN2] += 1;
         }
    
         return true;
