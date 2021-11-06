@@ -1,34 +1,21 @@
 public class Solution {
     public IList<string> LetterCasePermutation(string s) {
-        var list = new List<string>();
-        list.Add("");
-        DFS(s, 0, list);
-        
-        return list;
+        var ans = new List<string>();
+        DFS(s.ToCharArray(), 0, ans);
+        return ans;
     }
     
-    private void DFS(string s , int index, List<string> ans)
+    private void DFS(char[] c_arr, int curr, IList<string> ans)
     {
-        if(index >= s.Length) return;
-        var list = new List<string>();
-        
-        var c = s[index];
-        
-        foreach(var str in ans)
-        {
-            if(char.IsLetter(c))
-            {
-                list.Add(str + char.ToUpper(c));
-                list.Add(str + char.ToLower(c));
-            }
-            else
-            {
-                list.Add(str + c);
-            }
+        if(curr == c_arr.Length){
+            ans.Add(new String(c_arr));
+            return;
         }
         
-        ans.Clear();
-        ans.AddRange(list);
-        DFS(s, index+1, ans);
+        DFS(c_arr, curr+1, ans);
+        if(!Char.IsLetter(c_arr[curr])) return;
+        c_arr[curr] = (char)(((int)c_arr[curr]) ^ 1 << 5);
+        DFS(c_arr, curr+1, ans);
+        c_arr[curr] = (char)(((int)c_arr[curr]) ^ 1 << 5);
     }
 }
