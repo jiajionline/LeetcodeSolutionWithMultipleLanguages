@@ -5,7 +5,7 @@ public class Solution {
         {
             if(string.IsNullOrWhiteSpace(email)) continue;
             var str = email.Trim();
-            if(str[0] == '.' || str[0] == '+') continue;
+            if(str[0] == '+') continue;
             set.Add(NormalizeEmail(str));
         }
         
