@@ -1,30 +1,19 @@
-public class Solution
-{
-    public IList<IList<int>> Subsets(int[] nums)
-    {
+public class Solution {
+    public IList<IList<int>> Subsets(int[] nums) {
         var ans = new List<IList<int>>();
-        if (nums == null || nums.Length == 0) return ans;
-        var b = Math.Pow(2, nums.Length) - 1;
-
-
-        for (int i = 0; i <= b; i++)
+        
+        for(int i=0;i< (1 << nums.Length);i++)
         {
-            var curr = new List<int>();
-            var index = -1;
-            var k = i;
-            while (k > 0)
+            var list = new List<int>();
+    
+            for(int j=0;j<nums.Length;j++)
             {
-                index++;
-                if ((k & 1) > 0)
-                {
-                    curr.Add(nums[index]);
-                }
-                k = (k >> 1);
+                if((i & (1 << j)) > 0) list.Add(nums[j]);
             }
-
-            ans.Add(curr);
+            
+            ans.Add(list);
         }
-
+        
         return ans;
     }
 }
