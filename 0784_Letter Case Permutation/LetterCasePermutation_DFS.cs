@@ -14,8 +14,8 @@ public class Solution {
         
         DFS(c_arr, curr+1, ans);
         if(!Char.IsLetter(c_arr[curr])) return;
-        c_arr[curr] = (char)(((int)c_arr[curr]) ^ 1 << 5);
+        c_arr[curr] ^= (char)( 1 << 5);
         DFS(c_arr, curr+1, ans);
-        c_arr[curr] = (char)(((int)c_arr[curr]) ^ 1 << 5);
+        c_arr[curr] ^= (char)( 1 << 5);
     }
 }
