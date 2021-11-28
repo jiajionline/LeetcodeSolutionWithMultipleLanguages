@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 public class Solution
 {
     public int LadderLength(string beginWord, string endWord, IList<string> wordList)
@@ -13,26 +10,26 @@ public class Solution
         while (q.Count() > 0)
         {
             step++;
-            var cnt = q.Count();
-            for (int i = 0; i < cnt; i++)
+            var size = q.Count();
+            while (size-- > 0)
             {
-                var w = q.Dequeue();
-                var chArr = w.ToCharArray();
-                for (int j = 0; j < w.Length; j++)
+                var curr = q.Dequeue();
+                var c_arr = curr.ToCharArray();
+                for (int i = 0; i < curr.Length; i++)
                 {
-                    var w_c = w[j];
+                    var w_c = curr[i];
                     for (var c = 'a'; c <= 'z'; c++)
                     {
                         if (c == w_c) continue;
-                        chArr[j] = c;
-                        var tmp_s = new string(chArr);
+                        c_arr[i] = c;
+                        var tmp_s = new string(c_arr);
                         if (!set.Contains(tmp_s)) continue;
                         if (endWord.Equals(tmp_s)) return step + 1;
                         set.Remove(tmp_s);
                         q.Enqueue(tmp_s);
                     }
 
-                    chArr[j] = w[j];
+                    c_arr[i] = curr[i];
                 }
             }
         }
