@@ -1,21 +1,19 @@
 public class Solution {
     public int MinSubArrayLen(int target, int[] nums) {
-        var ans = nums.Length + 1;
-        
-        var begin = 0;
-        var end = 0;
-        
         var sum = 0;
-        while(end < nums.Length)
-        {           
-           sum += nums[end++];
-         
-          while (sum >= target) {
-               ans = Math.Min(ans, end - begin);
-               sum -= nums[begin++];
-           } 
-
+        var l = 0;
+        var ans = nums.Length + 1;
+        for(int r = 0;r<nums.Length;r++)
+        {
+            sum += nums[r];
+            
+            while(sum >= target)
+            {
+                ans = Math.Min(r - l + 1, ans);
+                sum -= nums[l++];
+            }
         }
-        return ans == nums.Length +1 ? 0 : ans;
+        
+        return ans == nums.Length + 1 ? 0 : ans;
     }
 }
