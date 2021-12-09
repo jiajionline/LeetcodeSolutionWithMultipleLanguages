@@ -37,17 +37,18 @@ public class Solution {
     }
     
     // using binary search to find the first job which StartTime >= lastEndTime
+    // [l,r)
     private int FindNextJob(List<Job> jobs, int lastEndTime)
     {
         var l = 0;
-        var r = jobs.Count - 1;
+        var r = jobs.Count ;
         
-        while(l <= r)
+        while(l < r)
         {
             var mid = (r - l) / 2 + l;
             if(jobs[mid].StartTime >= lastEndTime)
             {
-                r = mid - 1;
+                r = mid;
             }else{
                 l = mid + 1;
             }
