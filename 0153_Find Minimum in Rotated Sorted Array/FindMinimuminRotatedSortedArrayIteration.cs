@@ -1,26 +1,19 @@
-public class Solution
-{
-    public int FindMin(int[] nums)
-    {
-        if (nums.Length == 1) return nums[0];
-        if (nums.Length == 2) return Math.Min(nums[0], nums[1]);
-
-        int l = 0;
-        int r = nums.Length - 1;
-
-        while (nums[l] > nums[r])
+public class Solution {
+    public int FindMin(int[] nums) {
+        var l = 0;
+        var r = nums.Length-1;
+        
+        while(l < r)
         {
-            int mid = (r - l) / 2 + l;
-            if (nums[mid] > nums[r])
+            var mid = (r-l)/2 + l;
+            if(nums[mid] > nums[r])
             {
                 l = mid + 1;
-            }
-            else
-            {
+            }else{
                 r = mid;
             }
         }
-
+        
         return nums[l];
     }
 }
