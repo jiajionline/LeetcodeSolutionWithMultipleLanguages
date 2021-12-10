@@ -5,13 +5,14 @@ public class Solution
         if (nums == null || nums.Length == 0) return -1;
         int l = 0, r = nums.Length - 1;
         //[l,r]
-        while (l <= r)
+        while (l < r)
         {
             var m = (r - l) / 2 + l;
             if (nums[m] == target) return m;
+            
             if (nums[l] <= nums[m])
             {
-                if (target < nums[m] && target >= nums[l])
+                if (target >= nums[l] && target < nums[m])
                 {
                     r = m - 1;
                 }
@@ -33,7 +34,7 @@ public class Solution
             }
         }
  
-        return  -1;
+        return  nums[l] == target ? l : -1;
  
     }
 }
