@@ -12,6 +12,6 @@ public class Solution {
             }
         }
 
-        return r;
+        return l - 1;
     }
 }
