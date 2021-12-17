@@ -9,12 +9,11 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists == null || lists.length == 0) return null;
-        if(lists.length == 0) return lists[0];
         
         PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(lists.length,(a,b) -> a.val - b.val);
-        ListNode pre = new ListNode(-1);
-        ListNode curr = pre;
-        for(ListNode n : lists){
+        ListNode preHead = new ListNode(-1);
+        ListNode curr = preHead;
+        for(ListNode n : lists) {
             if(n!=null) pq.add(n);
         }
         
@@ -25,8 +24,9 @@ class Solution {
             if(node.next!=null){
                 pq.add(node.next);
             }
+            curr.next = null;
         }
         
-        return pre.next;
+        return preHead.next;
     }
 }
