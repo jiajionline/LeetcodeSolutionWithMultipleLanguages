@@ -1,28 +1,28 @@
-import java.util.*;
-
-public class GenerateParentheses {
+class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> ret = new LinkedList<String>();
-        RecursiveGeneration("",0,0,n,ret);
-        
-        return ret;
-        
+        List<String> ans = new ArrayList<String>();
+        generate(new char[n*2], 0, 0, n, ans);
+        return ans;
     }
     
-    private void RecursiveGeneration(String str, int l, int r, int n, List<String> ret){
-    	if(l == n && r == n){
-    		ret.add(str);
-    		return;
-    	}
-    	
-    	if(l < n){
-    		RecursiveGeneration(str + "(", l+1, r, n, ret);
-    	}
-    	
-    	if(l > r){
-    		RecursiveGeneration(str + ")", l , r+1, n, ret);
-    	}
+    private void generate(char[] chars,  int l , int r, int n, List<String> ans)
+    {
+        if(l == n && r == n)
+        {
+            ans.add(new String(chars));
+            return;
+        }
+        
+        if(l < n)
+        {
+            chars[l + r] = '(';
+            generate(chars,  l+1, r,n, ans);
+        }
+        
+        if(r < l)
+        {
+            chars[l + r] = ')';
+            generate(chars,  l, r+1, n, ans);
+        }
     }
-    
-    
 }
