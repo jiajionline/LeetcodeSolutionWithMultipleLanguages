@@ -1,23 +1,25 @@
 public class Solution {
     public int Trap(int[] height) {
         var ans = 0;
-        var leftMax = height[0];
-        var rightMax = height[height.Length-1];
-        var left = 0;
-        var right = height.Length -1;
-        while(left < right)
+        var l = 0;
+        var r = height.Length - 1;
+        var l_max = height[l];
+        var r_max = height[r];
+        
+        while(l < r)
         {
-            if(leftMax < rightMax)
+            if(l_max <= r_max)
             {
-                ans += leftMax - height[left];
-                leftMax = Math.Max(leftMax, height[++left]);
-            }else{
-                ans += rightMax - height[right];
-                rightMax = Math.Max(rightMax, height[--right]);
+                ans += l_max - height[l];
+                l_max = Math.Max(l_max, height[++l]);
+            }
+            else
+            {
+                ans += r_max - height[r];
+                r_max = Math.Max(r_max, height[--r]);
             }
         }
         
         return ans;
-        
     }
 }
