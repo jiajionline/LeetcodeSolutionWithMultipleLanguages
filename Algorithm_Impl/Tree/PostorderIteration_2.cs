@@ -1,21 +1,23 @@
 public class Solution {
-    public IList<int> PreorderTraversal(TreeNode root) {
+    public IList<int> PostorderTraversal(TreeNode root) {
         var ans = new List<int>();
-        TreeNode p = root;
         var stack = new Stack<TreeNode>();
+        var p = root;
+        
         while(p!=null || stack.Count > 0)
         {
             if(p!=null)
             {
                 ans.Add(p.val);
                 stack.Push(p);
-                p = p.left;
+                p = p.right;
             }else{
                 p = stack.Pop();
-                p = node.right;
+                p = p.left;
             }
         }
         
+        ans.Reverse();
         return ans;
     }
 }
