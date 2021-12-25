@@ -11,7 +11,7 @@ public class Solution {
                 stack.Push(p);
                 p = p.left;
             }else{
-                var node = stack.Pop();
+                p = stack.Pop();
                 p = node.right;
             }
         }
