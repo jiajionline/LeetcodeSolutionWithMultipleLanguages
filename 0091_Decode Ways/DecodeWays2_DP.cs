@@ -1,7 +1,7 @@
 //DP
 public class Solution {
     public int NumDecodings(string s) {
-        if(s == null || s.Length == 0 || s[0] == '0') return 0;
+        if(s == null || s[0] == '0') return 0;
         if(s.Length == 1) return 1;
 
         int n = s.Length;
