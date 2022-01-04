@@ -4,9 +4,9 @@ class Solution {
         int[][] dp  = new int[n][n];
         for (int i = 0; i < n; i++) dp[i][i] = piles[i];
         
-        for (int l = 2; l <= n; l++)
-            for (int i = 0; i < n - l + 1; i++){
-                int j = i + l - 1;
+        for (int len = 2; len <= n; len++)
+            for (int i = 0; i <= n - len; i++){
+                int j = i + len - 1;
                 dp[i][j] = Math.max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j-1]);
             }
                 
