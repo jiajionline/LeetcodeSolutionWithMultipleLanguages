@@ -1,43 +1,36 @@
-﻿public class Solution
-{
-    public string ReverseWords(string s)
-    {
-        char[] charArray = s.ToCharArray();
-        int left = 0;
-        int right = 0;
-
-        while(left <= right && right < s.Length)
+﻿public class Solution {
+    public string ReverseWords(string s) {
+        var n = s.Length;
+        var chars = s.ToCharArray();
+        var l = 0;
+        var r = 0;
+        var whitespace = true;
+        while(r < n)
         {
-            if(charArray[left] == ' ' && charArray[right] == ' ')
+            if(chars[r] != ' ' && whitespace)
             {
-                left++;
-                right++;
-            }else
+                l = r;
+                whitespace = false;
+            }else if(chars[r] == ' ' && !whitespace)
             {
-                while (right < s.Length && charArray[right] != ' ')
-                {
-                    right++;
-                }
-
-                InnerReverse(charArray, left, right - 1);
-                left = right;
-            }                
+                Reverse(chars, l, r-1);
+                whitespace = true;
+            }
+            
+            r++;
         }
-
-        return new string(charArray);
-
+        
+        if(!whitespace) Reverse(chars, l, r-1);
+        
+        return new String(chars);
     }
-
-    private void InnerReverse(char[] charArray, int left, int right)
+    
+    private void Reverse(char[] chars, int l , int r)
     {
-        while(left < right){
-            var temp = charArray[left];
-            charArray[left] = charArray[right];
-            charArray[right] = temp;
-            left++;
-            right--;
+        while(l < r) {
+            var tmp = chars[l];
+            chars[l++] = chars[r];
+            chars[r--] = tmp;
         }
-
     }
 }
-
