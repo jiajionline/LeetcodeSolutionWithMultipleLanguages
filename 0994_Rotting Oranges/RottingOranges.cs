@@ -44,7 +44,6 @@ public class Solution
             if (countOfFresh == 0) return ans;
         }
 
-        if (countOfFresh > 0) return -1;
-        return ans;
+        return -1;
     }
 }
