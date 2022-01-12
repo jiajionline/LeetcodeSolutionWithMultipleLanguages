@@ -13,6 +13,6 @@ class Solution:
             
             return (holding + prices[i], # sold
                     max(holding, cooldown - prices[i]), # do nothing, buy
-                    max(cooldown, sold)) #
+                    max(cooldown, sold)) # do nothing, sold
         
         return max(dp(len(prices)-1))
