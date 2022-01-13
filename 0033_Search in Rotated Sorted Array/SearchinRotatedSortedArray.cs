@@ -1,40 +1,26 @@
-public class Solution
-{
-    public int Search(int[] nums, int target)
-    {
-        if (nums == null || nums.Length == 0) return -1;
-        int l = 0, r = nums.Length - 1;
-        //[l,r]
-        while (l < r)
+public class Solution {
+    public int Search(int[] nums, int target) {
+        var l = 0;
+        var r = nums.Length-1;
+        
+        while(l <= r)
         {
-            var m = (r - l) / 2 + l;
-            if (nums[m] == target) return m;
-            
-            if (nums[l] <= nums[m])
+            var mid = (r-l)/2 + l;
+            if(nums[mid] == target) return mid;
+            if(nums[mid] >= nums[l])
             {
-                if (target >= nums[l] && target < nums[m])
-                {
-                    r = m - 1;
-                }
+                if(target >= nums[l] && target < nums[mid])
+                    r = mid-1;
                 else
-                {
-                    l = m + 1;
-                }
-            }
-            else
-            {
-                if (target > nums[m] && target <= nums[r])
-                {
-                    l = m + 1;
-                }
+                    l = mid+1;
+            }else{
+                if(target > nums[mid] && target <= nums[r])
+                    l = mid+1;
                 else
-                {
-                    r = m - 1;
-                }
+                    r = mid-1;
             }
         }
- 
-        return  nums[l] == target ? l : -1;
- 
+        
+        return -1;
     }
 }
