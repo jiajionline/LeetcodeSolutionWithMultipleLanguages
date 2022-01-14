@@ -10,8 +10,6 @@
             
             int l = i+1;
             int r = nums.Length - 1;
-            
-            var end = nums.Length - 1;
             var sum = 0 - nums[i];
             
             while(l < r){
