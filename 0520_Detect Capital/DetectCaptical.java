@@ -1,42 +1,14 @@
-
-public class Solution {
-    public boolean detectCapitalUse(String word)
-    {
-        if (word == null || word.length() == 0) return false;
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        boolean firstCapital = Character.isUpperCase(word.charAt(0));
         int countCapital = 0;
-        int countNonCapital = 0;
-        int other = 0;
-
-        for(char c : word.toCharArray())
+        
+        for(int i=0;i<word.length();i++)
         {
-            if(c >= 'A' && c <= 'Z')
-            {
-                countCapital++;
-            }else if(c >= 'a' && c <= 'z')
-            {
-                countNonCapital++;
-            }
-            else
-            {
-                other++;
-            }
+            char c = word.charAt(i);
+            if(Character.isUpperCase(c)) countCapital++;
         }
-
-        if(other > 0)
-        {
-            return false;
-        }
-       
-        if(countNonCapital == word.length() || countCapital == word.length())
-        {
-            return true;
-        }
-
-        if(word.charAt(0) >= 'A' && word.charAt(0) <= 'Z' && countNonCapital == word.length() - 1)
-        {
-            return true;
-        }
-
-        return false;
+        
+        return word.length() == countCapital || (firstCapital && countCapital == 1) || countCapital == 0;
     }
 }
