@@ -17,12 +17,12 @@ public class Solution {
     private int BinarySearch(List<int> list, int target)
     {
         var l = 0;
-        var r = list.Count - 1;
-        while(l <= r)
+        var r = list.Count;
+        while(l < r)
         {
             var mid = (r-l)/2 + l;
             if(list[mid] >= target)
-                r = mid-1;
+                r = mid;
             else
                 l = mid+1;
         }
