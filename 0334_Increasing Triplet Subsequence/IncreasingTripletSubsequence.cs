@@ -1,19 +1,16 @@
 public class Solution {
     public bool IncreasingTriplet(int[] nums) {
-        if(nums == null || nums.Length <=2 ) return false;
-        int n = nums.Length;
+        if(nums.Length <=2 ) return false;
+        var min = int.MaxValue;
+        var max = int.MaxValue;
         
-        int min = Int32.MaxValue;
-        int max = Int32.MaxValue;
-        
-        for(int i=0;i<n;i++){
-            if(nums[i] > max) return true;
-            
-            if(min > nums[i]){
-                min = nums[i];    
-            }else if(nums[i] > min && nums[i] < max){
-                max = nums[i];
-            }
+        foreach(var v in nums)
+        {
+            if(v > max) return true;
+            else if(v < min)
+                min = v;
+            else if(v > min && v < max)
+                max = v;
         }
         
         return false;
