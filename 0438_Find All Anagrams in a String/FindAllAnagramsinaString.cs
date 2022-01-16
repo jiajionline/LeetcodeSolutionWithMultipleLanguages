@@ -1,25 +1,25 @@
 public class Solution {
     public IList<int> FindAnagrams(string s, string p) {
         var ans = new List<int>();
-        var l_p = p.Length;
-        var l_s = s.Length;
-        
-        if(l_s < l_p) return ans;
+        int m = s.Length, n = p.Length;
+        if(m < n) return ans;
         var count = new int[26];
-        for(int i=0;i<l_p;i++)
+        
+        for(int i=0;i<n;i++)
         {
             count[p[i]-'a']++;
             count[s[i]-'a']--;
         }
         
-        if(AllZeros(count)) ans.Add(0);
+        if(AllZeros(count))
+            ans.Add(0);
         
-        for(int i=l_p;i<l_s;i++)
+        for(int i=n;i<m;i++)
         {
-            count[s[i]-'a']--; 
-            count[s[i-l_p]-'a']++;
+            count[s[i]-'a']--;
+            count[s[i-n]-'a']++;
             if(AllZeros(count))
-                ans.Add(i-l_p+1);
+                ans.Add(i-n+1);
         }
         
         return ans;
