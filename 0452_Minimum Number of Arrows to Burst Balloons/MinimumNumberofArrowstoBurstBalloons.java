@@ -3,7 +3,9 @@ class Solution {
         if(points == null || points.length == 0) return 0;
         
         Arrays.sort(points, (int[] a,int[] b) -> {
-            return a[1] - b[1];
+            if(a[1] < b[1]) return -1;
+            else if(a[1] == b[1]) return 0;
+            else return 1;
         });
         
         int ans = 1;

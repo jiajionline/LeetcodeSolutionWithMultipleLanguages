@@ -2,7 +2,11 @@ public class Solution {
     public int FindMinArrowShots(int[][] points) {
         if(points == null || points.Length == 0) return 0;
         
-        Array.Sort(points, (a,b) => a[1] - b[1]);
+        Array.Sort(points, (a,b) => {
+         if(a[1] < b[1]) return -1;
+                else if(a[1] == b[1]) return 0;
+                else return 1;
+        });
         
         var ans = 1;
         var currEnd = points[0][1];
