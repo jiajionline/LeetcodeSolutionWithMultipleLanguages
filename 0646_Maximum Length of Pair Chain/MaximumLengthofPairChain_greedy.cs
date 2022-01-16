@@ -1,15 +1,22 @@
 public class Solution {
     public int FindLongestChain(int[][] pairs) {
-        Array.Sort(pairs, (a,b) => a[1].CompareTo(b[1]));
-        var end = int.MinValue;
-        var ans = 0;
+        if(pairs.Length == 0) return 0;
         
-        for(int i=0;i< pairs.Length;i++)
+        Array.Sort(pairs, (a,b) => {
+            if(a[1] < b[1]) return -1;
+            else if(a[1] == b[1]) return 0;
+            else return 1;
+        });
+       
+        var ans = 1;
+        var currEnd = pairs[0][1];
+        
+        for(int i=1;i<pairs.Length;i++)
         {
-            if(pairs[i][0] > end)
+            if(currEnd < pairs[i][0])
             {
-                end = pairs[i][1];
-                ans++;
+                ans++;   
+                currEnd = pairs[i][1];
             }
         }
         
