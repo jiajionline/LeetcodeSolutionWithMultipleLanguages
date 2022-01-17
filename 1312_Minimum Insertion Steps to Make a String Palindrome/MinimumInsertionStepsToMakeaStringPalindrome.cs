@@ -1,11 +1,19 @@
 public class Solution {
     public int MinInsertions(string s) {
         if(string.IsNullOrEmpty(s)) return 0;
-        int n = s.Length;
-        var DP = new int[n,n];
-        for (int l = 2; l <= n; ++l)
-            for (int i = 0, j = l - 1; j < n; i++, j++)
-                DP[i,j] = s[i] == s[j] ? DP[i+1,j-1] : Math.Min(DP[i,j - 1], DP[i + 1,j]) + 1;
-        return DP[0,n-1];
+        var n = s.Length;
+        var dp = new int[n, n];
+        
+        for(var len = 2;len <=n;len++)
+            for(var l = 0; l <= n- len;l++)
+            {
+                var r = l + len - 1;
+                if(s[l] == s[r])
+                    dp[l,r] = dp[l+1,r-1];
+                else
+                    dp[l,r] = Math.Min(dp[l+1,r], dp[l,r-1]) + 1;
+            }
+        
+        return dp[0,n-1];
     }
 }
