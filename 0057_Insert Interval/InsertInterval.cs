@@ -1,32 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 public class Solution {
-    public int[][] Insert (int[][] intervals, int[] newInterval) {
-        var source = intervals.ToList ();
-        int index = -1;
-        for (int i = 0; i < source.Count; i++) {
-            if (newInterval[0] < source[i][0]) {
-                index = i;
-                break;
-            }
+    public int[][] Insert(int[][] intervals, int[] newInterval) {
+        var n = intervals.Length;
+        var list = intervals.ToList();
+        
+        var l = 0;
+        var r = n;
+        
+        while(l < r)
+        {
+            var mid = (r-l)/2 + l;
+            if(list[mid][0] > newInterval[0])
+                r = mid;
+            else
+                l = mid + 1;
+        }
+       
+        if(l == n)
+            list.Add(newInterval);
+        else
+            list.Insert(l, newInterval);
+        
+        var ans = new LinkedList<int[]> ();
+        foreach (var interval in list) {
+            if (ans.Count == 0 || ans.Last.Value[1] < interval[0])
+                ans.AddLast(interval);
+            else 
+                ans.Last.Value[1] = Math.Max(ans.Last.Value[1], interval[1]);
+            
         }
 
-        if (index == -1) {
-            source.Add (newInterval);
-        } else {
-            source.Insert (index, newInterval);
-        }
-
-        var list = new LinkedList<int[]> ();
-        foreach (var interval in source) {
-            if (list.Count == 0 || list.Last.Value[1] < interval[0]) {
-                list.AddLast (interval);
-            } else {
-                list.Last.Value[1] = Math.Max (list.Last.Value[1], interval[1]);
-            }
-        }
-
-        return list.ToArray ();
+        return ans.ToArray();
+        
     }
 }
