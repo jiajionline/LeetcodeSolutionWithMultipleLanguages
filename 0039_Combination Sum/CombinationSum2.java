@@ -1,34 +1,22 @@
-/**
- * this is a bonus solution for the result sorted like
-   [3,5]，
-   [2,3,3],
-   [2,2,2,2]
- */
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
-
-        List<Integer> cur = new ArrayList<Integer>();
         Arrays.sort(candidates);
-        for(int n = 1;n<=target/ candidates[0];n++){
-            DFS(candidates, target, 0, 0,n,cur, ans);
-        }
-        
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        DFS(candidates, 0, target, new ArrayList<Integer>(), ans);
         return ans;
     }
-
-    private void DFS(int[] candidates, int target, int s, int d, int n,List<Integer> cur, List<List<Integer>> ans){
-        if(d == n){
-            if(target == 0) ans.add(new ArrayList<Integer>(cur));
-        return;
+    
+    private void DFS(int[] candidates, int index, int target, List<Integer> list, List<List<Integer>> ans) {
+        if(target <= 0) {
+            if(target == 0)
+                ans.add(new ArrayList<Integer>(list));
+            return;
         }
         
-
-        for(int i=s;i<candidates.length;i++){
-            if(candidates[i] > target) break;
-            cur.add(candidates[i]);
-            DFS(candidates, target - candidates[i], i, d+1, n, cur, ans);
-            cur.remove(cur.size()-1);
-        }
+        for(int i=index;i<candidates.length;i++) {
+            list.add(candidates[i]);
+            DFS(candidates, i, target - candidates[i], list, ans);
+            list.remove(list.size()-1);
+        }       
     }
 }
