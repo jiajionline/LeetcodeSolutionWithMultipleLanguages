@@ -8,13 +8,11 @@ public class Solution {
         
         while(indexS < s.Length && indexT < t.Length)
         {
-            while(indexT < t.Length && t[indexT] != s[indexS]) 
-                indexT++;
-            
-            if(indexT < t.Length && t[indexT] == s[indexS]){
-                indexT++;
+            if(s[indexS] == t[indexT]) 
+            {
                 indexS++;
             }
+            indexT++;
         }
         
         return indexS == s.Length;
