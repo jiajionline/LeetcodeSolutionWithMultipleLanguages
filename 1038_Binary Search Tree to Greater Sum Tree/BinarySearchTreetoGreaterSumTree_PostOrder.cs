@@ -1,12 +1,3 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left;
- *     public TreeNode right;
- *     public TreeNode(int x) { val = x; }
- * }
- */
 public class Solution {
     private int accumulatedVal = 0;
     public TreeNode BstToGst(TreeNode root) {
