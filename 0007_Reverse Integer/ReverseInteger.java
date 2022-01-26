@@ -1,26 +1,20 @@
-
-public class Solution {
+class Solution {
     public int reverse(int x) {
-        long value = 0L;
-        boolean negative = x < 0;        
-        long y = x;
-        y = Math.abs(y);
+        if(x == 0) return 0;
+        boolean negative = x < 0;
+        x = Math.abs(x);
         
-        while(y > 0){
-        	value *= 10;
-        	value += y % 10;
-        	y /= 10;
+        long y = 0;
+        while(x > 0)
+        {
+            y *= 10;
+            y += (x % 10);
+            x /= 10;
         }
         
-        if(value > Integer.MAX_VALUE){
-        	return 0;
-        }
+        if(y > Integer.MAX_VALUE) return 0;
+        int ans = (int)y;
         
-        int ret = (int)value;
-        if(negative){
-        	return 0 - ret;
-        }else{
-        	return ret;
-        }
+        return negative ? -ans : ans;
     }
 }
