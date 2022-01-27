@@ -1,24 +1,23 @@
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-public class Solution {
+class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-    	if (nums == null || nums.length == 0 || k == 0) return nums;
-    	
-        int[] ans = new int[nums.length - k + 1];
-        //Why is ArrayDeque better than LinkedList?
-        //https://stackoverflow.com/questions/6163166/why-is-arraydeque-better-than-linkedlist
-        Deque<Integer> indices = new ArrayDeque<>();
-    
-        for (int i = 0; i < nums.length; i++) {
-            while (indices.size() > 0 && nums[i] >= nums[indices.getLast()]){
-			    indices.removeLast();
-			}
-            indices.addLast(i);
-            if (i - k + 1 >= 0) ans[i - k + 1] = nums[indices.getFirst()];        
-            if (i - k + 1 == indices.getFirst()) indices.removeFirst();
+        int n = nums.length;
+        if(n < k) return new int[0];
+        
+        Deque<Integer> deque = new ArrayDeque<Integer>();
+        int[] ans = new int[n - k + 1];
+        
+        for(int i=0;i<n;i++) {
+            while(deque.size() > 0 && nums[i] >= nums[deque.getLast()])
+                deque.removeLast();
+            
+            deque.addLast(i);
+            
+            if(i+1 >= k) {
+                ans[i-k+1] = nums[deque.getFirst()];   
+                if(i-k+1 == deque.getFirst()) deque.removeFirst();
+            }
         }
-             
+        
         return ans;
     }
 }
