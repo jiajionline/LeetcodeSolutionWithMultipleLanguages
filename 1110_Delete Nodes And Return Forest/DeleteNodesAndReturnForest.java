@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Solution {
     public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
         List<TreeNode> ans = new LinkedList<TreeNode>();
