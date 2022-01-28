@@ -1,30 +1,22 @@
-﻿public class Solution
-{
-    public int[] FindErrorNums(int[] nums)
-    {
-        int repition = int.MinValue;
-        int missing = int.MinValue;
-
-        for(int i = 0; i < nums.Length; i++)
+﻿public class Solution {
+    public int[] FindErrorNums(int[] nums) {
+        var ans = new int[2];
+        
+        for(var i=0;i<nums.Length;i++) 
         {
-            if(nums[Math.Abs(nums[i]) - 1] < 0)
+            var index = Math.Abs(nums[i])-1; 
+            if(nums[index] < 0)
+                ans[0] = index + 1;
+            else 
             {
-                repition = Math.Abs(nums[i]);
-            }else
-            {
-                nums[Math.Abs(nums[i]) - 1] *= -1;
+               nums[index] = 0 - nums[index]; 
             }
         }
-
-        for(int i = 0; i < nums.Length; i++)
-        {
+        
+        for(int i=0;i<nums.Length;i++)
             if(nums[i] > 0)
-            {
-                missing = i+1;
-            }
-        }
-
-        return new int[] { repition, missing };
+                ans[1] = i+1;
+        
+        return ans;
     }
 }
-
