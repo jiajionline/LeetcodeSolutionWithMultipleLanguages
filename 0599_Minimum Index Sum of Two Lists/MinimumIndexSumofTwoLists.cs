@@ -1,55 +1,26 @@
-﻿
-class Solution
-{
-    public string[] FindRestaurant(string[] list1, string[] list2)
-    {
-        var list = new LinkedList<Tuple<string,int>>();
-
-        var dict = new Dictionary<string, int>();
+﻿public class Solution {
+    public string[] FindRestaurant(string[] list1, string[] list2) {
+        int minSum = int.MaxValue;
+        var list = new List<string>();
+        var dict = new Dictionary<string,int>();
+        for(int i=0;i<list2.Length;i++)
+            dict.Add(list2[i],i);
+        
         for(int i=0;i<list1.Length;i++)
         {
-            if (!dict.ContainsKey(list1[i]))
+            if(dict.ContainsKey(list1[i])) 
             {
-                dict.Add(list1[i], i);
-            }
-        }
-
-        for(int i = 0; i < list2.Length; i++)
-        {
-            if (dict.ContainsKey(list2[i]))
-            {
-                int totalIndex = dict[list2[i]] + i;
-                
-                
-                if(list.Count == 0)
+                var sum = i + dict[list1[i]];
+                if(sum <= minSum)
                 {
-                    list.AddLast(new Tuple<string, int>(list2[i], totalIndex));
-                }
-                else
-                {   
-                    var existed = list.First;
-                    if(existed.Value.Item2 == totalIndex)
-                    {
-                        list.AddLast(new Tuple<string, int>(list2[i], totalIndex));
-                        
-                    }else if(existed.Value.Item2 > totalIndex)
-                    {
-                        list.Clear();
-                        list.AddLast(new Tuple<string, int>(list2[i], totalIndex));
-                    }
+                    if(sum < minSum) list.Clear();
+                    list.Add(list1[i]);
+                    minSum = sum;
                 }
             }
         }
-
-        string[] ret = new string[list.Count];
-
-        for(int i = 0; i < ret.Length; i++)
-        {
-            ret[i] = list.First.Value.Item1;
-            list.RemoveFirst();
-        }
-
-        return ret;
+        
+        return list.ToArray();
+        
     }
 }
-
