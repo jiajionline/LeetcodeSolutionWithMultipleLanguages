@@ -1,25 +1,23 @@
 class Solution {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        if(rooms == null) return false;
-        int count = rooms.size();
-        HashSet<Integer> visited = new HashSet();
-        visited.add(0);
+        boolean[] visited = new boolean[rooms.size()];
+        visited[0] = true;
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.add(0);
         
-        Queue<Integer> queue = new LinkedList();
-        for(Integer key : rooms.get(0)){
-            queue.add(key);
-        }
-        
-        while(queue.size()>0){
-            Integer key = queue.poll();
-            if(visited.contains(key)) continue;
-            visited.add(key);
+        while(queue.size() > 0) {
+            int room = queue.poll();
             
-            for(Integer newKey : rooms.get(key)){
-                queue.add(newKey);
+            for(Integer key : rooms.get(room)) {
+                if(visited[key]) continue;
+                queue.add(key);
+                visited[key] = true;
             }
         }
         
-        return visited.size() == rooms.size();
+        for(boolean v : visited)
+            if(!v) return false;
+        
+        return true;
     }
 }
