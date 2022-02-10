@@ -1,4 +1,4 @@
-public class Solution {
+eapublic class Solution {
     public void SetZeroes(int[][] matrix) {
         if(matrix == null || matrix.Length == 0) return;
         var m = matrix.Length;
