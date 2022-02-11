@@ -1,13 +1,13 @@
 public class Solution {
     public char NextGreatestLetter(char[] letters, char target) {
         var l = 0;
-        var r = letters.Length - 1;
+        var r = letters.Length;
         
-        while(l <= r)
+        while(l < r)
         {
             var mid = (r - l)/2 + l;
-            if((letters[mid] - 'a') > (target-'a'))
-                r = mid-1;
+            if(letters[mid] > target)
+                r = mid;
             else
                 l = mid+1;
         }
