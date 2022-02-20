@@ -3,8 +3,8 @@ public class UnionFindSet{
     private int[] ranks;
 
     public UnionFindSet(int count){
-        parents = new int[count+1];
-        ranks = new int[count+1];
+        parents = new int[count];
+        ranks = new int[count];
 
         for(int i=0;i<parents.length;i++){
             parents[i] = i;
@@ -18,7 +18,7 @@ public class UnionFindSet{
             parents[n] = find(parents[n]);
         }
 
-        return parents[n];
+        return n;
     }
 
     public boolean union(int n1, int n2) {

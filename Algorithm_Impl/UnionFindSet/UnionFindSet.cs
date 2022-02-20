@@ -1,40 +1,39 @@
-public class UnionFindSet{
-    private int[] parents;
-    private int[] ranks;
-
-    public UnionFindSet(int count){
-        parents = new int[count+1];
-        ranks = new int[count+1];
-
-        for(int i=0;i<parents.length;i++){
-            parents[i] = i;
-            ranks[i] = 1;
+public class UnionFindSet {
+    private int[] parent;
+    private int[] rank;
+    
+    public UnionFindSet(int n) {
+        parent = new int[n];
+        rank = new int[n];
+        
+        for(int u=0; u<n; u++)
+        {
+            parent[u] = u;
+            rank[u] = 1;
         }
     }
-
-    //return the root node
-    public int find(int n){
-        if(n != parents[n]){
-            parents[n] = find(parents[n]);
-        }
-
-        return parents[n];
+    
+    public int Find(int u) {
+        if(u != parent[u])
+            return Find(parent[u]);
+        return u;
     }
-
-    public boolean union(int n1, int n2) {
-        int rootN1 = find(n1);
-        int rootN2 = find(n2);
-        if (rootN1 == rootN2) return false;
-   
-        if (ranks[rootN1] > ranks[rootN2])
-            parents[rootN2] = rootN1;           
-        else if (ranks[rootN2] > ranks[rootN1])
-            parents[rootN1] = rootN2;
-        else {
-            parents[rootN1] = rootN2;
-            ranks[rootN2] += 1;
+    
+    public bool Union(int u, int v) {
+        var rootU = Find(u);
+        var rootV = Find(v);
+        
+        if(rootU == rootV) return false;
+        
+        if(rank[rootU] > rank[rootV])
+            parent[rootV] = rootU;
+        else if(rank[rootU] < rank[rootV])
+            parent[rootU] = rootV;
+        else{
+            parent[rootU] = rootV;
+            rank[rootV]++;
         }
-   
+            
         return true;
     }
 }
