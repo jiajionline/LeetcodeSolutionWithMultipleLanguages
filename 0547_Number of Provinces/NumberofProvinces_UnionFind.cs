@@ -1,63 +1,58 @@
 ﻿public class Solution {
     public int FindCircleNum(int[][] isConnected) {
-        var unionFindSet = new UnionFindSet(isConnected.Length);
-        for(int i=0;i<isConnected.Length;i++)
-        {
-            for(int j=i+1;j<isConnected[i].Length;j++)
-            {
-                if(isConnected[i][j] == 1){
-                    unionFindSet.Union(i,j);
-                }
+        if(isConnected == null || isConnected.Length == 0) return 0;
+        var n = isConnected.Length;
+        var unionFind = new UnionFindSet(n);
+        
+        for(int u=0; u<n; u++) {
+            for(int v=0; v<isConnected[u].Length; v++) {
+                if(isConnected[u][v] == 1)
+                    unionFind.Union(u,v);
             }
         }
         
         var set = new HashSet<int>();
-        for(int i=0;i<isConnected.Length;i++)
-            set.Add(unionFindSet.Find(i));
+        for(int u=0;u<n;u++)
+            set.Add(unionFind.Find(u));
         
         return set.Count;
     }
 }
 
-public class UnionFindSet
-{
-    private int[] parents;
-    private int[] ranks;
+public class UnionFindSet {
+    private int[] parent;
+    private int[] rank;
     
-    public UnionFindSet(int n)
-    {
-        parents = new int[n+1];
-        ranks = new int[n+1];
+    public UnionFindSet(int n) {
+        parent = new int[n];
+        rank = new int[n];
         
-        for(int i=0;i<parents.Length;i++)
-            parents[i] = i;
-        
-        for(int i=0;i<ranks.Length;i++)
-            ranks[i] = 1;
+        for(int u=0; u<n; u++)
+        {
+            parent[u] = u;
+            rank[u] = 1;
+        }
     }
     
-    public int Find(int n)
-    {
-        if(n != parents[n])
-            parents[n] = Find(parents[n]);
-        
-        return parents[n];
+    public int Find(int u) {
+        if(u != parent[u])
+            return Find(parent[u]);
+        return u;
     }
     
-    public bool Union(int u, int v)
-    {
+    public bool Union(int u, int v) {
         var rootU = Find(u);
         var rootV = Find(v);
         
         if(rootU == rootV) return false;
         
-        if(ranks[rootU] > ranks[rootV])
-            parents[rootV] = rootU;
-        else if(ranks[rootU] < ranks[rootV])
-            parents[rootU] = rootV;
+        if(rank[rootU] > rank[rootV])
+            parent[rootV] = rootU;
+        else if(rank[rootU] < rank[rootV])
+            parent[rootU] = rootV;
         else{
-            parents[rootU] = rootV;
-            ranks[rootV]++;
+            parent[rootU] = rootV;
+            rank[rootV]++;
         }
             
         return true;
