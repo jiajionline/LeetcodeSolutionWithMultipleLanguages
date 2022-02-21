@@ -8,6 +8,7 @@ class Solution {
         int v = edge[0];
         int u = edge[1];
         
+        // notice, visited would reset everytime.
         HashSet<Integer> visited = new HashSet<>();
         
         if(dfs(visited, u, v, adjList)){ // return true if there's a path between u and v already
