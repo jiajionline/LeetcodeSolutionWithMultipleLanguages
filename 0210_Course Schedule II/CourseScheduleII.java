@@ -22,21 +22,21 @@ class Solution {
         }
         
         for(int i=0;i<numCourses;i++){
-            if(DFS(graph, visited, i, result)) return new int[0];
+            if(hasCircle(graph, visited, i, result)) return new int[0];
         }
         
         return result.stream().mapToInt(i->i).toArray();
      
     }
     
-    //return true if there is a cycle.
-    private boolean DFS(List<List<Integer>> graph, int[] visited, int curr, List<Integer> result){
+    //return true if there is a circle.
+    private boolean hasCircle(List<List<Integer>> graph, int[] visited, int curr, List<Integer> result){
         if(visited[curr] == VISITED) return false;
         if(visited[curr] == VISITING) return true;
         visited[curr] = VISITING;
         
         for(int next : graph.get(curr)){
-            if(DFS(graph, visited, next,result)) return true;
+            if(hasCircle(graph, visited, next,result)) return false;
         }
         
         result.add(0,curr);

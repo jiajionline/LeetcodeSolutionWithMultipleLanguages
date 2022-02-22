@@ -18,7 +18,7 @@ public class Solution {
         
         var stack = new Stack<int>(numCourses);
         for(int course = 0; course < numCourses; course++)
-            if(DFS(graph, course, visited, stack)) return new int[0];
+            if(HashCircle(graph, course, visited, stack)) return new int[0];
         
         int[] ans = new int[numCourses];
     
@@ -29,12 +29,12 @@ public class Solution {
         return ans;
     }
     
-    private bool DFS(List<List<int>> graph, int v, int[] visited, Stack<int> stack){
+    private bool HashCircle(List<List<int>> graph, int v, int[] visited, Stack<int> stack){
         if(visited[v] == VISITED) return false;
         if(visited[v] == VISITING) return true;
         visited[v] = VISITING;
         foreach(var i in graph[v]){
-            if(DFS(graph, i, visited, stack)) return true;
+            if(HashCircle(graph, i, visited, stack)) return true;
         }
         
         visited[v] = VISITED;
