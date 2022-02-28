@@ -16,12 +16,10 @@ class Solution {
     }
 
     private boolean isSubsequence(String word) {
-        int   = -1;
+        int l = -1;
         for (char c : word.toCharArray()) {
           List<Integer> p = idx.get(c);
-          //lower bound
           int index = Collections.binarySearch(p, l + 1);
-          // If key is not present, the it returns "(-(insertion point) - 1)". 
           if (index < 0) index = -index - 1;
           if (index >= p.size()) return false;
           l = p.get(index);
