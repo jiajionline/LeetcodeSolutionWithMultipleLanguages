@@ -13,8 +13,6 @@ public class Solution {
             }
         }
         
-        ans.Sort();
-        
         return ans;
     }
     

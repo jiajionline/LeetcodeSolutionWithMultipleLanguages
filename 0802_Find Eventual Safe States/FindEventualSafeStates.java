@@ -3,20 +3,18 @@ class Solution {
 	private enum State {UNKNOWN, VISITING, SAFE, UNSAFE};
 	
     public List<Integer> eventualSafeNodes(int[][] graph) {
-    	List<Integer> result = new ArrayList<Integer>();
-    	if(graph == null) return result;
+    	List<Integer> ans = new ArrayList<Integer>();
+    	if(graph == null) return ans;
 
     	State[] states = new State[graph.length];    
     	
     	for(int i=0;i<graph.length;i++) {
     		if(DFS(graph, i, states) == State.SAFE) {
-    			result.add(i);
+    			ans.add(i);
     		}
     	}
-    	
-        Collections.sort(result);
 
-    	return result;
+    	return ans;
     }
     
     private State DFS (int[][] graph, int curr, State[] states) {
