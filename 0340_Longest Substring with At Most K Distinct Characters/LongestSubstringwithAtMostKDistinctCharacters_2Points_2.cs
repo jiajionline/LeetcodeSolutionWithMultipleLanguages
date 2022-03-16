@@ -6,7 +6,7 @@ public class Solution {
         
         for(int r=0;r<s.Length;r++)
         {
-            if(!dict.ContainsKey(s[r])) dict.Add(s[r],-1);
+            if(!dict.ContainsKey(s[r])) dict.Add(s[r],r);
             dict[s[r]] = r;
             
             while(dict.Count > k)
