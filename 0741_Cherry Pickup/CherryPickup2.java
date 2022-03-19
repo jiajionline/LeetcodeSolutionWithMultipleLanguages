@@ -23,12 +23,17 @@ class Solution {
         int ans = Math.max(Math.max(dp(x1-1,y1,x2-1, grid, memo), dp(x1,y1-1,x2, grid, memo)), 
                            Math.max(dp(x1-1,y1,x2, grid, memo), dp(x1,y1-1,x2-1, grid, memo)));
         
+        // no answer
         if(ans < 0) {
             memo[x1][y1][x2] = ans;
             return ans;
         }
+
+        //pick up the cherry for p1
         ans += grid[x1][y1];
+        //if p1 and p2 are not standing on the same cell, pick up the cherry for p2
         if(x1 != x2) ans += grid[x2][y2];
+        //cache the answer
         memo[x1][y1][x2] = ans;
         return ans;
     }
