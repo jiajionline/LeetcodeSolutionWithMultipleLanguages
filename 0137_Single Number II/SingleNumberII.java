@@ -6,7 +6,7 @@ public class Solution {
             for(int j=0;j<A.length;j++){
                 bit += ((A[j]>>i) & 1);
             }            
-            ans += ((bit % 3) << i );
+            ans |= ((bit % 3) << i );
         }        
         return ans;
     }
