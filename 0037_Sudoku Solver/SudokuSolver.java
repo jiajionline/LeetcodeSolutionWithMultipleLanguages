@@ -28,11 +28,13 @@ class Solution {
         return true;
     }
     
-    private boolean isValid(char[][] board, int x, int y, char k){
-        for(int i=0;i<9;i++){
-            if(board[x][i] == k) return false;
-            if(board[i][y] == k) return false;
-            if(board[3 * (x/3) + i / 3][3 * (y/3) + i % 3] == k) return false;
+    private boolean isValid(char[][] board, int row, int col, char c){
+        int regionRow = 3 * (row / 3);  //region start row
+        int regionCol = 3 * (col / 3);    //region start col
+        for (int i = 0; i < 9; i++) {
+            if (board[i][col] == c) return false; //check row
+            if (board[row][i] == c) return false; //check column
+            if (board[regionRow + i / 3][regionCol + i % 3] == c) return false; //check 3*3 block
         }
         return true;
     }
