@@ -18,8 +18,13 @@ class Solution {
         {
             int[] first = pq.poll();
             int[] second = pq.poll();
-            sb.append((char)first[0]);
-            sb.append((char)second[0]);
+            if (sb.length() == 0 || first[0] != sb.charAt(sb.length() - 1)) {
+                sb.append((char)first[0]);
+                sb.append((char)second[0]);
+            }else{
+                sb.append((char)second[0]);
+                sb.append((char)first[0]);
+            }
             
             first[1]--;
             second[1]--;
