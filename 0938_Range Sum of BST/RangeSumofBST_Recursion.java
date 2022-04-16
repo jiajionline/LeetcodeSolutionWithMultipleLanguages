@@ -1,14 +1,12 @@
 class Solution {
-    private int ans = 0;
     public int rangeSumBST(TreeNode root, int low, int high) {
-        traverse(root, low, high);
-        return ans;
-    }
-    
-    private void traverse(TreeNode node, int low, int high) {
-        if(node == null) return;
-        if(low <= node.val && node.val <= high) ans += node.val;
-        if(low <= node.val) traverse(node.left, low, high);
-        if(node.val <= high) traverse(node.right, low, high);
+        if(root == null) return 0;
+        if(root.val >= low && root.val <= high) {
+            return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
+        }else if(root.val < low) {
+            return rangeSumBST(root.right, low, high);
+        }else{
+            return rangeSumBST(root.left, low, high);
+        }
     }
 }
