@@ -1,18 +1,15 @@
 class Solution {
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-        Map<String, List<TreeNode>> map = new HashMap<String, List<TreeNode>>();
-        List<TreeNode> dups = new ArrayList<TreeNode>();
-        serialize(root, map);
-        for (List<TreeNode> group : map.values())
-            if (group.size() > 1) dups.add(group.get(0));
-        return dups;
+        List<TreeNode> ans = new LinkedList<>();
+        postorder(root, new HashMap<>(), ans);
+        return ans;
     }
 
-    private String serialize(TreeNode node, Map<String, List<TreeNode>> map) {
-        if (node == null) return "";
-        String s = "(" + serialize(node.left, map) + node.val + serialize(node.right, map) + ")";
-        if (!map.containsKey(s)) map.put(s, new ArrayList<TreeNode>());
-        map.get(s).add(node);
-        return s;
+    public String postorder(TreeNode node, Map<String, Integer> map, List<TreeNode> ans) {
+        if (node == null) return "#";  
+        String serialized = node.val + "," + postorder(node.left, map, ans) + "," + postorder(node.right, map, ans);
+        map.put(serialized, map.getOrDefault(serialized, 0) + 1);
+        if (map.get(serialized) == 2) ans.add(node);
+        return serialized;
     }
 }
