@@ -5,7 +5,7 @@ class Solution {
     }    
     
     public int findKthLargest(int[] nums, int start, int end, int k) {// quick select: kth smallest
-        if (start > end) return Integer.MAX_VALUE;
+        if (start == end) return nums[start];
         
         int pivot = nums[end];// Take A[end] as the pivot, 
         int left = start;
