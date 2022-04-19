@@ -1,25 +1,24 @@
-
 class Solution {
     public Node cloneGraph(Node node) {
-        if (node == null)
-            return null;
-        HashMap<Node, Node> map = new HashMap<>();
-        map.put(node, new Node(node.val, new ArrayList<Node>()));
-        Queue<Node> queue = new LinkedList<Node>();
+        if(node == null) return null;
+        Map<Node, Node> map = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
         queue.offer(node);
-
-        while (queue.size() > 0) {
+        map.put(node, new Node(node.val));
+        
+        while(queue.size() > 0) {
             Node n = queue.poll();
-
-            for (Node childNode : n.neighbors) {
-                if (!map.containsKey(childNode)) {
-                    map.put(childNode, new Node(childNode.val, new ArrayList<Node>()));
-                    queue.offer(childNode);
+            Node copy = map.get(n);
+            for(Node next : n.neighbors) {
+                if(!map.containsKey(next)) {
+                    map.put(next, new Node(next.val));
+                    queue.offer(next);
                 }
-                map.get(n).neighbors.add(map.get(childNode));
+                
+                 copy.neighbors.add(map.get(next));
             }
         }
-
+        
         return map.get(node);
     }
 }

@@ -1,19 +1,18 @@
 class Solution {
     public Node cloneGraph(Node node) {
         if(node == null) return null;
-        HashMap<Node,Node> map = new HashMap();
-        visit(map, node);
+        Map<Node, Node> map = new HashMap<>();
+        DFS(node, map);
         return map.get(node);
     }
     
-    private void visit(HashMap<Node, Node> map, Node node) {
-        if(!map.containsKey(node)) {
-            Node clone = new Node(node.val);
-            map.put(node, clone);
-            for(Node neighbor : node.neighbors) {
-                visit(map, neighbor);
-                clone.neighbors.add(map.get(neighbor));
-            }
+    private void DFS(Node node, Map<Node, Node> map) {
+        if(node == null || map.containsKey(node)) return;
+        Node copy = new Node(node.val);
+        map.put(node, copy);
+        for(Node next : node.neighbors) {
+            DFS(next, map);
+            copy.neighbors.add(map.get(next));
         }
     }
 }
