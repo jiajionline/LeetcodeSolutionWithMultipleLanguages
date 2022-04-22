@@ -17,7 +17,7 @@ public class Solution {
         }
         // l and r could possibly be greater than 1 like
         // ")()()("  l is 1 and r is 1 
-        // "(((((()))" l is 2 and r is 0
+        // "((((()))" l is 2 and r is 0
         // "()())()" l is 0 and r is 1
         
         var ans = new List<string>();
