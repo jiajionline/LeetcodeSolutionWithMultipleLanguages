@@ -1,44 +1,34 @@
 class Solution {
     public String decodeString(String s) {
-        if(s == null || s.length() == 0) return "";
-        char[] s_arr = s.toCharArray();
-        
-        Stack<Integer> countStack = new Stack();
-        Stack<String> strStack = new Stack();
-        StringBuffer buffer = new StringBuffer();
+        Stack<Integer> countStack = new Stack<>();
+        Stack<StringBuilder> strStack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
         int index = 0;
         
-        while(index < s_arr.length)
-        {
-            if(Character.isDigit(s_arr[index]))
-            {
-                int count = 0;
-                while(Character.isDigit(s_arr[index])){
-                    count = count * 10 + Integer.valueOf(s_arr[index++]-'0');   
-                }
+        while(index < s.length()) {
+            char c = s.charAt(index);
+            if(Character.isDigit(c)) {
+                count *= 10;
+                count += (c - '0');
+            }else if(c == '[') {
+                strStack.push(sb);
                 countStack.push(count);
-                
-            }else if(s_arr[index] == '['){
-                strStack.push(buffer.toString());
-                buffer.setLength(0);
-                index++;
-            }else if(s_arr[index] == ']'){
-                StringBuffer tmp = new StringBuffer();
-                int count = countStack.pop();
-                tmp.append(strStack.pop());
-                for(int i=0;i<count;i++)
-                {
-                    tmp.append(buffer.toString());
+                count = 0;
+                sb = new StringBuilder();
+            }else if(c == ']') {
+                StringBuilder tmpSb = strStack.pop();
+                for(int i=countStack.pop() - 1;i>=0;i--) {
+                    tmpSb.append(sb);
                 }
-                buffer.setLength(0);
-                buffer.append(tmp.toString());
-                index++;
-            }else{
-                buffer.append(s_arr[index++]);
+                sb = tmpSb;
+            }else {
+                sb.append(c);
             }
+            
+            index++;
         }
         
-        return buffer.toString();
-        
+        return sb.toString();
     }
 }
