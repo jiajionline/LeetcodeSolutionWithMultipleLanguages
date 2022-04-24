@@ -40,28 +40,60 @@ class Node {
 
 class Solution {
     public Node construct(int[][] grid) {
-        int n = grid.length;
-        return build(grid, 1, n, 1, n);
+        int m = grid.length;
+        int n = grid[0].length;
+        return construct(grid, 0, m-1 , 0, n-1);
     }
     
-    private Node build(int[][] grid, int  rowTop, int rowBottom, int colLeft, int colRight) 
-    {
-        if(rowTop == rowBottom && colLeft == colRight) {
-            return new Node(grid[rowTop-1][colLeft-1] == 1, true, null, null, null, null);
+    private Node construct(int[][] grid, int rowL, int rowR, int colL, int colR) {
+        // smallest grid
+        if(rowL == rowR && colL == colR) {
+            Node node = new Node(grid[rowL][colL] == 1, true);
+            return node;
         }
-        int rowMid = (rowBottom - rowTop)/2 + rowTop;
-        int colMid = (colRight - colLeft)/2 + colLeft;
         
-        Node topLeft = build(grid, rowTop, rowMid, colLeft, colMid);
-        Node topRight = build(grid, rowTop, rowMid, colMid+1, colRight);
-        Node bottomLeft = build(grid, rowMid + 1, rowBottom, colLeft, colMid);
-        Node bottomRight = build(grid, rowMid + 1, rowBottom, colMid + 1, colRight);
+        int rowM = (rowR - rowL)/2 + rowL;
+        int colM = (colR - colL)/2 + colL;
+        Node topLeft = construct(grid, rowL, rowM, colL, colM);
+        Node topRight = construct(grid, rowL, rowM, colM+1, colR);
+        Node bottomLeft = construct(grid, rowM+1, rowR, colL, colM);
+        Node bottomRight = construct(grid, rowM+1, rowR,colM+1, colR);
         
         if(topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf && 
           topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val) {
-            return new Node(topLeft.val, true, null, null, null, null);
-        }else{
+            return new Node(topLeft.val, true);
+        }else {
             return new Node(topLeft.val, false, topLeft, topRight, bottomLeft, bottomRight);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
