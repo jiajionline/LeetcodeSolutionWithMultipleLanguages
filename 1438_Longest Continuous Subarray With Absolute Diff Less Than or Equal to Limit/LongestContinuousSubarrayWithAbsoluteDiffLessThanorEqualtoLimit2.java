@@ -1,8 +1,8 @@
 class Solution {
     public int longestSubarray(int[] nums, int limit) {
-        //max monotonic stack 
+        //max monotonic stack (left is biggest, right is smallest)
         Deque<Integer> maxQ = new LinkedList();
-        //min monotonic stack
+        //min monotonic stack (left is smallest, right is biggest)
         Deque<Integer> minQ = new LinkedList();
         
         int l = 0;
@@ -19,7 +19,7 @@ class Solution {
             maxQ.addLast(nums[r]);
             minQ.addLast(nums[r]);
             
-            if (maxQ.peekFirst() - minQ.peekFirst() > limit) {
+            while (maxQ.peekFirst() - minQ.peekFirst() > limit) {
                 if (nums[l] == maxQ.peekFirst()) {
                     maxQ.pollFirst();
                 }
