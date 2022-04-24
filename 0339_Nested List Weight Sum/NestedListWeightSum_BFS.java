@@ -28,22 +28,22 @@
  */
 class Solution {
     public int depthSum(List<NestedInteger> nestedList) {
-        int ans = 0;
-        Queue<Pair<NestedInteger,Integer>> queue = new LinkedList<>();
-        for(NestedInteger ni : nestedList) {
-            queue.add(new Pair(ni, 1));
-        }
+        Queue<NestedInteger> queue = new LinkedList<>();
+        for(NestedInteger ni : nestedList) queue.add(ni);
         
+        int ans = 0;
+        int depth = 0;
         while(queue.size() > 0) {
-            Pair<NestedInteger, Integer> pair = queue.poll();
-            NestedInteger nested = pair.getKey();
-            int depth = pair.getValue();
+            int size = queue.size();
+            depth++;
             
-            if(nested.isInteger()) {
-                ans += nested.getInteger() * depth;
-            }else {
-                for(NestedInteger ni : nested.getList())
-                    queue.add(new Pair(ni, depth+1));
+            while(size-- > 0) {
+                NestedInteger ni = queue.poll();
+                if(ni.isInteger()) {
+                    ans += depth * ni.getInteger();
+                }else {
+                    queue.addAll(ni.getList());
+                }
             }
         }
         
