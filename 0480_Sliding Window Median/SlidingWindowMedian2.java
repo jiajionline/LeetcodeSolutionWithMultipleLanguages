@@ -1,62 +1,46 @@
-public class Solution {
-    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Collections.reverseOrder());
-
+class Solution {
+    
     public double[] medianSlidingWindow(int[] nums, int k) {
-        int n = nums.length - k + 1;
-        if (n <= 0)
-            return new double[0];
-        double[] result = new double[n];
-
-        for (int i = 0; i <= nums.length; i++) {
-            if (i >= k) {
-                result[i - k] = getMedian();
-                remove(nums[i - k]);
-            }
-            if (i < nums.length) {
-                add(nums[i]);
+        int n = nums.length;
+        MeanQueue queue = new MeanQueue();
+        double[] ans = new double[n - k + 1];
+        
+        for(int i = 0; i < n; i++){
+            queue.offer(nums[i]);
+            if(i + 1 >= k){
+                ans[i - k + 1] = queue.getMedian();
+                queue.remove(nums[i - k + 1]);
             }
         }
 
-        return result;
+        return ans;
     }
-
-    private void add(int num) {
-        if (num < getMedian()) {
-            maxHeap.add(num);
-        } else {
-            minHeap.add(num);
+    
+    class MeanQueue{
+        PriorityQueue<Integer> max = new PriorityQueue<Integer>((a,b) -> Integer.compare(b, a)); 
+        PriorityQueue<Integer> min = new PriorityQueue<Integer>(); // min is a Min-heap stores larger half of nums
+    
+        void offer(int num){
+            max.offer(num);     
+            min.offer(max.poll());
+            
+            if(max.size() < min.size()){ // balance, max size always >= min size
+                max.offer(min.poll());
+            }
         }
-        if (maxHeap.size() > minHeap.size()) {
-            minHeap.add(maxHeap.poll());
+        
+        double getMedian(){
+            return max.size() > min.size() ? max.peek() : (max.peek() / 2.0 + min.peek() / 2.0);
         }
-        if (minHeap.size() - maxHeap.size() > 1) {
-            maxHeap.add(minHeap.poll());
+        
+        int size(){
+            return max.size() + min.size();
         }
-    }
-
-    private void remove(int num) {
-        if (num < getMedian()) {
-            maxHeap.remove(num);
-        } else {
-            minHeap.remove(num);
+        
+        void remove(int x){
+            if(max.size() > 0 && max.peek() >= x) max.remove(x);
+            else min.remove(x);
         }
-        if (maxHeap.size() > minHeap.size()) {
-            minHeap.add(maxHeap.poll());
-        }
-        if (minHeap.size() - maxHeap.size() > 1) {
-            maxHeap.add(minHeap.poll());
-        }
-    }
-
-    private double getMedian() {
-        if (maxHeap.isEmpty() && minHeap.isEmpty())
-            return 0;
-
-        if (maxHeap.size() == minHeap.size()) {
-            return ((double) maxHeap.peek() + (double) minHeap.peek()) / 2.0;
-        } else {
-            return (double) minHeap.peek();
-        }
+     
     }
 }
