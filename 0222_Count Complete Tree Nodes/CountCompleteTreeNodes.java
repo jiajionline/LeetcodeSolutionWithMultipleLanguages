@@ -1,8 +1,8 @@
 class Solution {
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
-        int leftDepth = leftDepth(root);
-        int rightDepth = rightDepth(root);
+        int leftDepth = depth(root, true);
+        int rightDepth = depth(root, false);
         if(leftDepth == rightDepth) {
             return (1 << leftDepth) - 1;
         }else {
@@ -10,23 +10,12 @@ class Solution {
         }
     }
     
-    private int leftDepth(TreeNode node) {
+    private int depth(TreeNode node, boolean isLeft) {
         int depth = 0;
         TreeNode tmpNode = node;
         while(tmpNode!=null) {
             depth++;
-            tmpNode = tmpNode.left;
-        }
-        
-        return depth;
-    }
-    
-    private int rightDepth(TreeNode node) {
-        int depth = 0;
-        TreeNode tmpNode = node;
-        while(tmpNode!=null) {
-            depth++;
-            tmpNode = tmpNode.right;
+            tmpNode = isLeft ? tmpNode.left : tmpNode.right;
         }
         
         return depth;
