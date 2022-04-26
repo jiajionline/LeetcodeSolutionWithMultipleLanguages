@@ -46,7 +46,7 @@ class Solution {
     private Node build(int[][] grid, int  x, int y, int len) 
     {
         if(len == 1) {
-            return new Node(grid[x][y] == 1, true, null, null, null, null);
+            return new Node(grid[x][y] == 1, true);
         }
         
         Node topLeft = build(grid, x, y, len/2);
@@ -56,7 +56,7 @@ class Solution {
         
         if(topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf && 
           topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val) {
-            return new Node(topLeft.val, true, null, null, null, null);
+            return new Node(topLeft.val, true);
         }else{
             return new Node(topLeft.val, false, topLeft, topRight, bottomLeft, bottomRight);
         }
