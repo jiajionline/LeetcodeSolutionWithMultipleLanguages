@@ -3,7 +3,7 @@ class Solution {
         s = s.trim();
         
         boolean positive = true;
-        int ans = 0;
+        long ans = 0;
         int index = 0;
         int n = s.length();
         
@@ -18,15 +18,15 @@ class Solution {
         while(index < n && Character.isDigit(s.charAt(index))) {
             int digit = s.charAt(index) - '0';
             
-            //check overflow & underflow
-            if( ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE/10 && digit > Integer.MAX_VALUE % 10)) {
-                return positive ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-            }
-            
             ans = 10 * ans + digit;
             index++;
+            
+            if(positive && ans > Integer.MAX_VALUE) 
+                return Integer.MAX_VALUE;
+            else if(!positive && -ans < Integer.MIN_VALUE)  return Integer.MIN_VALUE;      
         }
         
-        return positive ? ans : ans * -1;
+        
+        return positive ? (int)ans : (int)ans * -1;
     }
 }
