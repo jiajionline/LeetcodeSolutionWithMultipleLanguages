@@ -20,12 +20,8 @@ class Solution {
         
         for(int i=m-1;i>=0;i--) {
             for(int j=n-1;j>=0;j--) {
-                if(mat[i][j] == 0) {
-                    ans[i][j] = 0;
-                }else {
-                    if(i<m-1) ans[i][j] = Math.min(ans[i][j], ans[i+1][j] + 1);
-                    if(j<n-1) ans[i][j] = Math.min(ans[i][j], ans[i][j+1] + 1);
-                }
+                if(i<m-1) ans[i][j] = Math.min(ans[i][j], ans[i+1][j] + 1);
+                if(j<n-1) ans[i][j] = Math.min(ans[i][j], ans[i][j+1] + 1);
             }
         }
         
