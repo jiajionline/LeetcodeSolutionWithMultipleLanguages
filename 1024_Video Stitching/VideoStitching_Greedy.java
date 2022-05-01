@@ -1,25 +1,25 @@
 class Solution {
     public int videoStitching(int[][] clips, int time) {
-        Arrays.sort(clips, (a,b) -> Integer.compare(a[0], b[0]));
-        int currFar = 0;
+        Arrays.sort(clips, (a,b)-> Integer.compare(a[0], b[0]));
+        int curr = 0;
+        int ans = 0;
         int i = 0;
-        int count = 0;
-        
         while(i < clips.length) {
-            int nextFar = currFar;
-            // if current start of the clip is less and equals to the currFar, 
-            // so the clip overlapped with its previous, we can decide the nextFar
-            while( i < clips.length && clips[i][0] <= currFar) {
-                nextFar = Math.max(nextFar, clips[i][1]);
+            int far = curr;
+            // if the start of the clip is less and equals to the curr, 
+            // so the clip overlapped with its previous, we can decide the far
+            while(i < clips.length && clips[i][0] <= curr) {
+                far = Math.max(far, clips[i][1]);
                 i++;
             }
             
-            count++;
+            ans++;
             
-            if(nextFar >= time) return count;
-            else if(nextFar == currFar) return -1;
+            if(far >= time) return ans;
+            // can't move anymore like [0,2] <- curr, far  [4,6]
+            else if(far == curr) return -1;
             
-            currFar = nextFar;
+            curr = far;
         }
         
         return -1;
