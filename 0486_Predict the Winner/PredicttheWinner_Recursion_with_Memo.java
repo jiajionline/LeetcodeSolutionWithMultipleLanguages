@@ -1,16 +1,20 @@
 class Solution {
     public boolean PredictTheWinner(int[] nums) {
-        return getScore(nums, 0, nums.length-1, new HashMap<String, Integer>()) >= 0;
+        int n = nums.length;
+        int[][] memo = new int[n][n];
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                memo[i][j] = Integer.MIN_VALUE;
+            }
+        }
+        return PredictTheWinner(nums, 0, nums.length-1, memo) >= 0;
     }
     
-    private int getScore(int[] nums, int l , int r, HashMap<String, Integer> cache) {
-        
+    private int PredictTheWinner(int[] nums, int l, int r, int[][] memo) {
         if(l == r) return nums[l];
-        String key = l + "_" + r;
-        if(cache.containsKey(key)) return cache.get(key);
-        
-        int score = Math.max(nums[l] - getScore(nums, l+1,r, cache), nums[r] - getScore(nums, l, r-1, cache));
-        cache.put(key, score);
-        return score;
+        if(memo[l][r] != Integer.MIN_VALUE) return memo[l][r];
+        int res = Math.max(nums[l] - PredictTheWinner(nums, l+1, r, memo), nums[r] - PredictTheWinner(nums, l , r-1, memo));
+        memo[l][r] = res;
+        return res;
     }
 }
