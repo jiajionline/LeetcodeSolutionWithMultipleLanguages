@@ -12,9 +12,14 @@ class Solution {
         int month = Integer.valueOf(ss[1]);
         int day = Integer.valueOf(ss[2]);
         
-        int ydelta = year - 1 - 1900;
-        int dy = ydelta * 365 + ydelta / 4;// from 1900 every 4 years is leap year
-       
+        int dy = 0;
+        for(int i=1900;i<year;i++) {
+           if(isleap(i)) 
+               dy+=366;
+           else 
+               dy += 365;
+        }
+        
         int[] monthOfDays = getMonthOfDays();
         int dm = monthOfDays[month - 1];
         if (isleap(year) && month-1 >= 2) {
