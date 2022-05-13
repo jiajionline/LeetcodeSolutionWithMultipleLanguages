@@ -1,14 +1,22 @@
 class Solution {
     public Node connect(Node root) {
-        connect(root, null, true);
+        if (root == null) return root;
+        Queue<Node> queue = new LinkedList<Node>(); 
+        queue.add(root);
+        
+        while (queue.size() > 0) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if (i < size - 1) {
+                    node.next = queue.peek();
+                }
+
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+        }
+
         return root;
-    }
-    
-    private void connect(Node node, Node parent, boolean isLeft) {
-        if(node == null) return;
-        if(parent!=null) 
-            node.next = isLeft ? parent.right : (parent.next == null ? null : parent.next.left);
-        connect(node.left, node, true);
-        connect(node.right, node, false);
     }
 }
