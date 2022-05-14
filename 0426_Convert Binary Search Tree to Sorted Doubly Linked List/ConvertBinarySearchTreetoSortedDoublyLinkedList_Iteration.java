@@ -2,6 +2,7 @@ class Solution {
     
     public Node treeToDoublyList(Node root) {
         if(root == null) return null;
+        
         Node head = null, tail = null, prev = null;
         Stack<Node> stack = new Stack<>();
             
