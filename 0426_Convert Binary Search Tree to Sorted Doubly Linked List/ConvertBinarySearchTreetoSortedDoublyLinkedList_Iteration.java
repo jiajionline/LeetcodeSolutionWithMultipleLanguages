@@ -1,26 +1,32 @@
 class Solution {
+    
     public Node treeToDoublyList(Node root) {
-        if( root == null) return root;
-        Node preHead = new Node(-1);
-        Node prev = preHead;
-        Stack<Node> stack = new Stack();
-        Node curr = root;
-
-        while(stack.size() > 0 || curr != null){
-            while(curr != null) {
-                stack.push(curr);
-                curr = curr.left;
+        if(root == null) return null;
+        Node head = null, tail = null, prev = null;
+        Stack<Node> stack = new Stack<>();
+            
+        while(stack.size() > 0 || root != null) {
+            while(root!=null) {
+                stack.push(root);
+                root = root.left;
             }
-
-        curr = stack.pop();
-        prev.right = curr;
-        curr.left = prev;
-        prev = curr;
-        curr = curr.right;
+            
+            root = stack.pop();
+            if(head == null) {
+                head = root;
+            }
+            
+            if(prev!=null) {
+                prev.right = root;
+                root.left = prev;
+            }
+            prev = root;
+            tail = root;
+            root = root.right;
         }
         
-        preHead.right.left = prev;
-        prev.right = preHead.right;
-        return preHead.right;
+        head.left = tail;
+        tail.right = head;
+        return head;
     }
 }
