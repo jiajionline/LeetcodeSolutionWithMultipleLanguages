@@ -15,10 +15,10 @@ public class UnionFindSet{
     //return the root node
     public int find(int n){
         if(n != parents[n]){
-            parents[n] = find(parents[n]);
+            parents[n] =  find(parents[n]);
         }
 
-        return n;
+        return parents[n];
     }
 
     public boolean union(int n1, int n2) {
