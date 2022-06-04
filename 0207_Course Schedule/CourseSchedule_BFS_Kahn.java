@@ -1,0 +1,27 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        int[] indegree = new int[numCourses];
+        for(int[] prerequisite : prerequisites) {
+            int u = prerequisite[1], v = prerequisite[0];
+            graph.computeIfAbsent(u, x-> new ArrayList<Integer>()).add(v);
+            indegree[v]++;
+        }
+        
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<numCourses;i++) {
+            if(indegree[i] == 0) q.offer(i);
+        }
+        
+        int count = 0;
+        while(!q.isEmpty()) {
+            int u = q.poll();
+            count++;
+            for(int v : graph.getOrDefault(u, new ArrayList<Integer>())) {
+                if(--indegree[v] == 0) q.offer(v);
+            }
+        }
+        
+        return count == numCourses;
+    }
+}
