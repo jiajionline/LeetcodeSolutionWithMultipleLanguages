@@ -1,40 +1,30 @@
 
 class Solution {
-	private enum State {UNKNOWN, VISITING, SAFE, UNSAFE};
-	
-    public List<Integer> eventualSafeNodes(int[][] graph) {
-    	List<Integer> ans = new ArrayList<Integer>();
-    	if(graph == null) return ans;
+	enum State { SAFE,UNSAFE }
 
-    	State[] states = new State[graph.length];    
-    	
-    	for(int i=0;i<graph.length;i++) {
-    		if(DFS(graph, i, states) == State.SAFE) {
-    			ans.add(i);
-    		}
-    	}
+	public List<Integer> eventualSafeNodes(int[][] graph) {
+		List<Integer> ans = new ArrayList<>(graph.length);
+		State[] states = new State[graph.length];
+		for (int node = 0; node < graph.length; node++) {
+			if (dfs(graph, node, states)) {
+				ans.add(node);
+			}
+		}
+		return ans;
+	}
 
-    	return ans;
-    }
-    
-    private State DFS (int[][] graph, int curr, State[] states) {
-    	if(states[curr] == State.VISITING) {
-    		states[curr] = State.UNSAFE;
-    	}
-    	
-    	if(states[curr] == State.SAFE || states[curr] == State.UNSAFE) return states[curr];
-    	
-    	states[curr] = State.VISITING;
-    	
-    	for(int v : graph[curr]) {
-    		if(DFS(graph, v, states) == State.UNSAFE) {
-    			states[curr] = State.UNSAFE;
-    			return State.UNSAFE;
-    		}
-    	}
-    	
-    	states[curr] = State.SAFE;
-    	return State.SAFE;
-    	
-    }
+	private boolean dfs(int[][] graph, int node, State[] states) {
+		if (states[node] != null) {
+			return states[node] == State.SAFE;
+		}
+
+		states[node] = State.UNSAFE;
+
+		for (int next : graph[node]) {
+			if (!dfs(graph, next, states)) return false;
+		}
+
+		states[node] = State.SAFE;
+		return true;
+	}
 }
