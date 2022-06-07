@@ -1,43 +1,31 @@
 class Solution {
     public String minWindow(String s, String t) {
-        if(s.length() < t.length()) return "";
+        int left = 0, count = 0, minStart = 0, minLen = Integer.MAX_VALUE;
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c : t.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);
         
-        HashMap<Character, Integer> map = new HashMap();
-        for(Character c : t.toCharArray())
-            map.put(c, map.getOrDefault(c, 0) + 1);
-        
-        int l = 0;
-        int r = 0;
-        int minL = -1;
-        int minLen = s.length() + 1;
-        int count = 0;
-        
-        while(r < s.length()) {
-            char c = s.charAt(r);     
+        for(int i=0;i<s.length();i++) {
+            char c = s.charAt(i);
             if(map.containsKey(c)) {
+                if(map.get(c) > 0) count++;
                 map.put(c, map.get(c) - 1);
-                if(map.get(c) >= 0) count++;
             }
             
             while(count == t.length()) {
-                if(r - l + 1 < minLen) {
-                    minL = l;
-                    minLen = r - l + 1;
+                if(i - left + 1 < minLen) {
+                    minLen = i - left + 1;
+                    minStart = left;
                 }
                 
-                char tmpChar = s.charAt(l);
-                if(map.containsKey(tmpChar)) {
-                    map.put(tmpChar, map.get(tmpChar) + 1);
-                    if(map.get(tmpChar) > 0) count--;
+                char ch = s.charAt(left);
+                if(map.containsKey(ch)) {
+                    map.put(ch, map.get(ch) + 1);
+                    if(map.get(ch) > 0) count--;    
                 }
-                
-                l++;
+                left++;
             }
-            
-            r++;
         }
         
-        if(minL == -1) return "";
-        return s.substring(minL, minL + minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
     }
 }
