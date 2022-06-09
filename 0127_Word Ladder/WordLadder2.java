@@ -1,49 +1,43 @@
-import java.util.HashSet;
-import java.util.Set;
-
 //bidirectional BFS
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-      Set<String> wordSet = new HashSet<>(wordList);
-      
+      Set<String> beginSet = new HashSet<>(), endSet = new HashSet<>(), wordSet = new HashSet<>(wordList);
       if (!wordSet.contains(endWord)) return 0;
       
-      Set<String> q1 = new HashSet<>();
-      Set<String> q2 = new HashSet<>();
-      q1.add(beginWord);
-      q2.add(endWord);
+      beginSet.add(beginWord);
+      endSet.add(endWord);
       
-      int l = beginWord.length();
+      int N = beginWord.length();
       int steps = 0;
       
-      while (!q1.isEmpty() && !q2.isEmpty()) {
+      while (!beginSet.isEmpty() && !endSet.isEmpty()) {
         ++steps;
         
-        if (q1.size() > q2.size()) {
-          Set<String> tmp = q1;
-          q1 = q2;
-          q2 = tmp;
+        if (beginSet.size() > endSet.size()) {
+          Set<String> tmp = beginSet;
+          beginSet = endSet;
+          endSet = tmp;
         }
         
-        Set<String> q = new HashSet<>();
+        Set<String> nextSet = new HashSet<>();
         
-        for (String w : q1) {        
+        for (String w : beginSet) {        
           char[] chaArr = w.toCharArray();
-          for (int i = 0; i < l; ++i) {
+          for (int i = 0; i < N; ++i) {
             char ch = chaArr[i];
             for (char c = 'a'; c <= 'z'; ++c) {
               chaArr[i] = c;
               String t = new String(chaArr);         
-              if (q2.contains(t)) return steps + 1;            
+              if (endSet.contains(t)) return steps + 1;            
               if (!wordSet.contains(t)) continue;            
               wordSet.remove(t);        
-              q.add(t);
+              nextSet.add(t);
             }
             chaArr[i] = ch;
           }
         }
         
-        q1 = q;
+        beginSet = nextSet;
       }
       return 0;
     }
