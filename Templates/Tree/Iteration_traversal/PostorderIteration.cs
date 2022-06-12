@@ -7,7 +7,7 @@ public class Solution {
         while(stack.Count > 0)
         {
             var node = stack.Pop();
-            list.Add(node.val);
+            list.Insert(0, node.val);
             if(node.left!=null) stack.Push(node.left);
             if(node.right!=null) stack.Push(node.right);
         }
