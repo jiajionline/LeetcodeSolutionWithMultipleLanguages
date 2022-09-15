@@ -7,17 +7,29 @@ public class Solution {
             int mid = l + (r - l) / 2;
             int total = 0;
             int j = matrix[0].length - 1;
-            for(int i = 0; i < matrix.length; i++) {
-                // also can use binary search here 
-                // calculate how many matrix[i][j] is less and equal than mid
-                while(j >= 0 && matrix[i][j] > mid) j--;
-                //since j is array based index, should add 1 for counting
-                total += (j + 1);
-            }
-            // this is lower bound since we want to find where exactly the k is.
-            if(total >= k) r = mid;
-            else l = mid + 1;
+            if (equalOrSmaller(matrix,mid)<k)
+                l = mid+1;
+            else
+                r = mid;
         }
         return l;
+    }
+    
+    private int equalOrSmaller(int[][] matrix, int val)
+    {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int i=n-1, j=0, count = 0;
+        while (i>=0 && j<m)
+        {
+            if (matrix[i][j]<=val)
+            {
+                count+=(i+1);
+                j++;
+            }
+            else
+                i--;                
+        }
+        return count;
     }
 }
