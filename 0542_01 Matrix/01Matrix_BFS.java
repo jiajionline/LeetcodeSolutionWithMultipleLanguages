@@ -27,7 +27,7 @@ class Solution {
                 int dx = x + dirs[i];
                 int dy = y + dirs[i+1];
                 
-                if(dx >= 0 && dy >= 0 && dx < m && dy < n && ans[x][y] < ans[dx][dy]) {
+                if(dx >= 0 && dy >= 0 && dx < m && dy < n && ans[dx][dy] - 1 > ans[x][y]) {
                     ans[dx][dy] = ans[x][y] + 1;
                     queue.add(new int[]{dx, dy});
                 }
