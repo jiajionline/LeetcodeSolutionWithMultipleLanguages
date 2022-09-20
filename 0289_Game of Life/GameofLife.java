@@ -12,6 +12,10 @@ class Solution {
                     }
                 }
                 
+                //if((((board[i][j] & 1) == 0) && lives == 3) || 
+                //   (((board[i][j] & 1) == 1) && (lives == 3 || lives == 4)))
+                //        board[i][j] |= (1 << 1);
+
                 if(lives == 3 || lives - board[i][j] == 3)
                     board[i][j] |= (1 << 1);
             }
@@ -23,4 +27,4 @@ class Solution {
             }
         }
     }
-}it 
+}
