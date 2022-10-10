@@ -1,23 +1,26 @@
 //Recursion + Memoization to avoid duplicate computation
 class Solution {
     public int numDecodings(String s) {
-        return ways(s, new HashMap<String, Integer>());
+        return numDecodings(0,s,new HashMap<>());
     }
     
-    private int ways(String s, HashMap<String, Integer> memo) {
-        if(s.isEmpty()) return 1;
-        if(s.charAt(0) == '0') return 0;
-        if(s.length() == 1) return 1;
-        if(memo.containsKey(s)) return memo.get(s);
+    private int numDecodings(int index, String str, Map<Integer,Integer> memo) {
+        if(memo.containsKey(index)) return memo.get(index);
         
-        int ans = ways(s.substring(1), memo);
-        int twoDigits = Integer.parseInt(s.substring(0,2));
-        if(twoDigits >= 10 && twoDigits <= 26) {
-            ans += ways(s.substring(2), memo);
+        // If you reach the end of the string, return 1 for success.
+        if(index == str.length()) return 1;
+        
+        // '0' can't be decoded
+        if(str.charAt(index) == '0') return 0;
+        
+        if(index == str.length() - 1) return 1;
+        
+        int ans = numDecodings(index+1,str,memo);
+        if(Integer.parseInt(str.substring(index, index + 2)) <= 26) {
+            ans += numDecodings(index+2, str, memo);
         }
         
-        memo.put(s,ans);
-        
+        memo.put(index, ans);
         return ans;
     }
 }
