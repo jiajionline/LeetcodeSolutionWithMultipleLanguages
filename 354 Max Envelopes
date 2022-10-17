@@ -1,0 +1,23 @@
+public static int maxEnvelopes(int[][] arr) {
+
+		Arrays.sort(arr,(a, b)->{ 
+		if(a[0]==b[0]) return b[1] - a[1];  
+			else return a[0]-b[0];   
+		});
+
+		int n=arr.length;
+		int[] dp=new int[n];
+		int maxLen = 0;
+		for (int i =0;i<n;i++) {
+			dp[i] = 1;
+			for (int j = 0; j < i; j++) { 
+				if (arr[i][1] > arr[j][1]) { // compare height. 
+					dp[i] = Math.max(dp[i], dp[j] + 1);
+				}
+			}
+			maxLen = Math.max(maxLen, dp[i]);
+		}
+
+		return maxLen;
+	}
+	
