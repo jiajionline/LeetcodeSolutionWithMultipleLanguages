@@ -1,20 +1,14 @@
 class Solution {
     public boolean canJump(int[] nums) {
-        if(nums == null || nums.length == 0) return false;
-        //no need to jump
-        if(nums.length == 1) return true;
+        int n = nums.length;
+        int furthest = 0;
         
-        int furthestPos = 0;
-        for(int i=0;i<nums.length;i++){
-            if(furthestPos < i){
-                return false;
-            }else if(furthestPos >= nums.length-1){
-                return true;
-            }else{
-                furthestPos = Math.max(furthestPos, nums[i] + i);
-            }
+        for(int i=0;i<n;i++) {
+            if(i > furthest) return false;
+            furthest = Math.max(furthest, nums[i] + i);
+            if(furthest >= n-1) return true;
         }
         
-        return furthestPos >= nums.length-1;
+        return furthest >= n-1;
     }
 }
