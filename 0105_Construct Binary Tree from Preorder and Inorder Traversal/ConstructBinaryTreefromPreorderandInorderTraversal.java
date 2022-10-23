@@ -5,7 +5,7 @@ class Solution {
     
     public TreeNode buildTree(int[] preorder, int preL,  int[] inorder, int inL, int inR)
     {
-        if(preL > preorder.length-1 || inL > inR) return null;
+        if(preL >= preorder.length || inL > inR) return null;
         
         int rootVal = preorder[preL];
         TreeNode root = new TreeNode(rootVal);
