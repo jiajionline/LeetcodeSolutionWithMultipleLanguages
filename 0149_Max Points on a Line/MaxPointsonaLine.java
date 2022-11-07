@@ -59,7 +59,6 @@ class Solution {
 
         @Override
         public final int hashCode() {
-            int result = 17;
             return 31 * this.x + this.y;
         }
     }
