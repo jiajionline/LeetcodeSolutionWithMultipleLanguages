@@ -4,7 +4,6 @@ class Solution {
         int prev = lower - 1;
         for (int i = 0; i <= nums.length; i++) {
             int curr = (i < nums.length) ? nums[i] : upper + 1;
-            //there are more than 1 space  between prev and curr
             if (prev + 1 <= curr - 1) {
                 ans.add(range(prev + 1, curr - 1));
             }
