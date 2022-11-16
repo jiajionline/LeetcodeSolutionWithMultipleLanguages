@@ -17,5 +17,5 @@ class Solution {
         totalSum += d * d;
     }
     return totalSum;
-}
+  }
 }
