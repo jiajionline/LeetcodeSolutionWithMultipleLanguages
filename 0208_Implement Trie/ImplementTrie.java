@@ -1,50 +1,47 @@
-class TrieNode {
-    public boolean isWord;
-    public TrieNode[] children = new TrieNode[26];
-    // Initialize your data structure here.
-    public TrieNode() {
-        
-    }
-}
-
-public class Trie {
+class Trie {
     private TrieNode root;
 
     public Trie() {
         root = new TrieNode();
     }
-
-    // Inserts a word into the trie.
+    
     public void insert(String word) {
-        TrieNode ws = root;
-        for(int i = 0; i < word.length(); i++){
-            char ch = word.charAt(i);
-            if(ws.children[ch - 'a'] == null){
-                ws.children[ch - 'a'] = new TrieNode();
-            }
-            ws = ws.children[ch - 'a'];
+        TrieNode p = root;
+        for(int i=0;i<word.length();i++){
+            char c = word.charAt(i);
+            if(p.children[c - 'a'] == null) p.children[c-'a'] = new TrieNode();
+            p = p.children[c - 'a'];
         }
-        ws.isWord = true;
-    }
-
-    // Returns if the word is in the trie.
-    public boolean search(String word) {
-        TrieNode ws = searchHelper(word);
-        return ws != null && ws.isWord;
-    }
-
-    // Returns if there is any word in the trie
-    // that starts with the given prefix.
-    public boolean startsWith(String prefix) {
-         return searchHelper(prefix) != null;
+        
+        p.hasWord = true;
     }
     
-    public TrieNode searchHelper(String key){
-        TrieNode ws = root;
-        for(int i = 0; i < key.length() && ws != null; i++){
-            char ch = key.charAt(i);
-            ws = ws.children[ch - 'a'];
+    public boolean search(String word) {
+        TrieNode p = innerSearch(word);
+        return p!= null && p.hasWord;
+    }
+    
+    public boolean startsWith(String prefix) {
+        return innerSearch(prefix) != null;
+    }
+    
+    private TrieNode innerSearch(String word) {
+        TrieNode p = root;
+        for(int i=0;i<word.length();i++){
+            char c = word.charAt(i);
+            if(p.children[c - 'a'] == null) return null; 
+            p = p.children[c - 'a'];
         }
-        return ws;
+        
+        return p;
+    }
+    
+    class TrieNode{
+        TrieNode[] children;
+        boolean hasWord;
+        public TrieNode(){
+            children = new TrieNode[26];
+            hasWord = false;
+        }
     }
 }
