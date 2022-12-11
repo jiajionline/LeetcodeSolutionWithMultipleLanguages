@@ -12,9 +12,9 @@ class Solution {
         int rootVal = preorder[preL];
         TreeNode root = new TreeNode(rootVal);
         int rootIndexInOrder = inorderMap.get(rootVal);
-        
+        int leftTreeSize = rootIndexInOrder - inL;
         root.left = buildTree(preorder, preL+1, inorder, inL , rootIndexInOrder-1,inorderMap);
-        root.right = buildTree(preorder, preL+rootIndexInOrder-inL + 1, inorder, rootIndexInOrder+1, inR,inorderMap);
+        root.right = buildTree(preorder, preL+1+leftTreeSize, inorder, rootIndexInOrder+1, inR,inorderMap);
         
         return root;
     }
