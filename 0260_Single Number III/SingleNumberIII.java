@@ -27,7 +27,7 @@ class Solution {
     private int firstBitIs1(int v) {
 
         int index = 0;
-        while (((v & 1) == 0) && index < 32) {
+        while (((v & 1) == 0)) {
             v >>= 1;
             index++;
         }
