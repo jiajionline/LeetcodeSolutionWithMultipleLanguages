@@ -1,49 +1,27 @@
 class Solution {
     public int numIslands(char[][] grid) {
-      if (grid == null || grid.length == 0) {
-        return 0;
-      }
-  
-      int m = grid.length;
-      int n = grid[0].length;
-      int ans = 0;
-  
-      for (int r = 0; r < m; ++r) {
-        for (int c = 0; c < n; ++c) {
-          if (grid[r][c] == '1') {
-            ans++;
-            grid[r][c] = '0'; 
-            Queue<Integer> queue = new LinkedList<>();
-            queue.add(r * n + c);
-            while (!queue.isEmpty()) {
-              int id = queue.remove();
-              int row = id / n;
-              int col = id % n;
-              //left
-              if (row - 1 >= 0 && grid[row-1][col] == '1') {
-                queue.add((row-1) * n + col);
-                grid[row-1][col] = '0';
-              }
-              //right
-              if (row + 1 < m && grid[row+1][col] == '1') {
-                queue.add((row+1) * n + col);
-                grid[row+1][col] = '0';
-              }
-              //up
-              if (col - 1 >= 0 && grid[row][col-1] == '1') {
-                queue.add(row * n + col-1);
-                grid[row][col-1] = '0';
-              }
-              //down
-              if (col + 1 < n && grid[row][col+1] == '1') {
-                queue.add(row * n + col+1);
-                grid[row][col+1] = '0';
-              }
+        int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
+        int ans = 0;
+        for(int i=0;i<grid.length;i++) {
+            for(int j=0;j<grid[i].length;j++) {
+                if(grid[i][j] == '1') {
+                    ans++;
+                    bfs(grid, i, j, dirs);
+                }
             }
-          }
         }
-      }
-  
-      return ans;
+        return ans;
     }
-  }
+    
+    private void bfs(char[][] grid, int row, int col, int[][] dirs) {
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{row, col});
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            int x = cur[0], y = cur[1];
+            if(x < 0 || y < 0 || x == grid.length || y == grid[x].length || grid[x][y] != '1') continue;
+            grid[x][y] = '0';
+            for(int[] dir : dirs) q.offer(new int[]{x + dir[0], y + dir[1]});
+        }
+    }
+}
