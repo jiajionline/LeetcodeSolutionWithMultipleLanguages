@@ -1,34 +1,32 @@
-public class Solution {
-    public int shortestDistance(int[][] maze, int[] start, int[] dest) {
+class Solution {
+    public int shortestDistance(int[][] maze, int[] start, int[] destination) {
         int m = maze.length, n = maze[0].length;
-        int[][] distance = new int[m][n];
-        for (int[] row: distance) Arrays.fill(row, Integer.MAX_VALUE);
+        int[][] dist = new int[m][n];
+        for (int[] row: dist) Arrays.fill(row, Integer.MAX_VALUE);
         
-        distance[start[0]][start[1]] = 0;
-        int[] dirs= {0, 1, 0, -1, 0};
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(start);
-        while (!queue.isEmpty()) {
-            int[] s = queue.poll();
-            int x = s[0], y = s[1];
+        dist[start[0]][start[1]] = 0;
+        int[][] dirs = {{0,-1},{1,0},{0,1},{-1,0}};
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(start);
+        
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            int x = cur[0], y = cur[1];
             
-             for(int i=0;i<4;i++) {
-                int dx = x + dirs[i];
-                int dy = y + dirs[i+1];
-                int count = 0;
-                while (dx >= 0 && dy >= 0 && dx < m && dy < n && maze[dx][dy] == 0) {
-                    dx += dirs[i];
-                    dy += dirs[i+1];
-                    count++;
-                } 
-                
-                if(distance[x][y] + count < distance[dx - dirs[i]][dy - dirs[i+1]]){
-                    distance[dx - dirs[i]][dy - dirs[i+1]] = distance[x][y] + count;
-                    queue.add(new int[]{dx - dirs[i], dy - dirs[i+1]});
+            for(int[] dir : dirs){
+                int dx = x, dy = y, steps = 0;
+                while(dx + dir[0] >= 0 && dy + dir[1] >= 0 && dx + dir[0] < m && dy + dir[1] < n && maze[dx + dir[0]][dy+dir[1]] != 1){
+                    steps++;
+                    dx += dir[0];
+                    dy += dir[1];
                 }
-             }
-            
+                
+                if(dist[x][y] + steps < dist[dx][dy]){
+                    dist[dx][dy] = dist[x][y] + steps;
+                    q.offer(new int[]{dx,dy});
+                }
+            }
         }
-        return distance[dest[0]][dest[1]] == Integer.MAX_VALUE ? -1 : distance[dest[0]][dest[1]];
+        return dist[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : dist[destination[0]][destination[1]];
     }
 }
