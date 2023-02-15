@@ -3,7 +3,7 @@ class Solution {
         if(matrix.length == 0) return 0;
         
         int ans = 0;
-        int[] dirs = new int[] { 0, -1, 0, 1, 0 };
+        int[] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
         int m = matrix.length;
         int n = matrix[0].length;
         int[][] dp = new int[m][n];
@@ -21,9 +21,9 @@ class Solution {
         
         for(Point p : points){
             dp[p.x][p.y] = 1;
-            for(int i=0;i<4;i++){
-                int dx = dirs[i] + p.x;
-                int dy = dirs[i+1] + p.y;
+            for(int[] dir : dirs){
+                int dx = dir[0] + p.x;
+                int dy = dir[1] + p.y;
                 if(dx < 0 || dy < 0 || dx == m || dy == n || matrix[dx][dy] <= p.v) continue;
                 dp[p.x][p.y] = Math.max(dp[p.x][p.y], dp[dx][dy] + 1);
             }
