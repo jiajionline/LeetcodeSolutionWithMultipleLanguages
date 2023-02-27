@@ -1,7 +1,8 @@
 class Solution {
     public boolean checkValidString(String s) {
-        int[][] memo = new int[s.length()][s.length()];
-        return isValid(s, 0, s.length() - 1, memo);
+        int n = s.length();
+        int[][] memo = new int[n][n];
+        return isValid(s, 0, n - 1, memo);
     }
     
     private boolean isValid(String s, int l , int r, int[][] memo) {
@@ -16,11 +17,13 @@ class Solution {
             return memo[l][r] == 2;
         }
         
+        // case 1 :  L LLLRRR R
         if((chL == '(' || chL == '*') && (chR == ')' || chR == '*') && isValid(s, l+1, r-1, memo)) {
             memo[l][r] = 2;
             return true;
         }
         
+        // case 2: L LRR LLR R
         for(int p=l;p<r;p++) {
             if(isValid(s, l, p, memo) && isValid(s, p+1, r, memo)) {
                 memo[l][r] = 2;
