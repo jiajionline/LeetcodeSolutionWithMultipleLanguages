@@ -12,7 +12,7 @@ public class Solution {
                 var s = j+1;
                 var e = nums.Length - 1;
                 while(s < e){
-                    var v = nums[i] + nums[j] + nums[s] + nums[e];
+                    long v = (long)nums[i] + (long)nums[j] + (long)nums[s] + (long)nums[e];
                     if(v == target){
                         ans.Add(new int[]{nums[i],nums[j],nums[s],nums[e]});
                         while(s < e && nums[s] == nums[s+1]) s++;
