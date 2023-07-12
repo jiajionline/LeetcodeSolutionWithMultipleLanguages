@@ -15,9 +15,10 @@ class Solution {
             }
         }
         
-        if(l >=0 && l < nums.length && nums[l] == target){
+        if(l >=0 && l < nums.length && nums[l] == target)
             ans[0] = l;
-        }else return ans;
+        else 
+            return ans;
         
         l = 0;
         r = nums.length;
@@ -31,9 +32,9 @@ class Solution {
             }
         }
         
-        if(l-1 >= 0 && l-1 < nums.length){
-            ans[1] = l-1;
-        }
+        l = l-1;
+        if(l >=0 && l < nums.length && nums[l] == target)
+            ans[1] = l;
         
         return ans;
     }
