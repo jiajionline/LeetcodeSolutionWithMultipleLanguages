@@ -24,7 +24,7 @@ class Solution {
         int peak = l;
         
         l = 0;
-        r = peak;
+        r = peak+1;
         
         while(l < r) {
             int mid = (r-l)/2 + l;
