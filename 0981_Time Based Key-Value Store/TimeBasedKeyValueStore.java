@@ -1,38 +1,35 @@
-class Data {
-    String val;
-    int time;
-    Data(String val, int time) {
-        this.val = val;
-        this.time = time;
-    }
-}
-public class TimeMap {
+class TimeMap {
+    private Map<String, List<Pair<Integer,String>>> cache;
 
-    Map<String, List<Data>> map;
     public TimeMap() {
-        map = new HashMap<String, List<Data>>();
+        cache = new HashMap<>();
     }
     
     public void set(String key, String value, int timestamp) {
-        if (!map.containsKey(key)) map.put(key, new ArrayList<Data>());
-        map.get(key).add(new Data(value, timestamp));
+        if(!cache.containsKey(key)) cache.put(key, new ArrayList<Pair<Integer,String>>());
+        cache.get(key).add(new Pair<Integer,String>(timestamp, value));
     }
     
     public String get(String key, int timestamp) {
-        if (!map.containsKey(key)) return "";
-        return binarySearch(map.get(key), timestamp);
+        if(!cache.containsKey(key)) return "";
+        List<Pair<Integer,String>> list = cache.get(key);
+        String ans = search(list, timestamp);
+        return ans;
     }
-    
-    protected String binarySearch(List<Data> list, int time) {
-        int low = 0, high = list.size() ;
-        while (low < high) {
-            int mid = (high - low)/2 + low;
-            if (list.get(mid).time <= time) {
-                low = mid + 1;
+
+    private String search(List<Pair<Integer,String>> list, int target) {
+        int l = 0, r = list.size();
+        while(l < r) {
+            int mid = (r-l)/2 + l;
+            Pair<Integer,String> midPair = list.get(mid);
+            if(midPair.getKey() > target) {
+                r = mid;
+            }else{
+                l = mid + 1;
             }
-            else high = mid;
         }
-        
-        return (high == 0) ? "" : list.get(high-1).val;
+        l = l-1;
+        if(l>=0) return list.get(l).getValue();
+        return "";
     }
 }
