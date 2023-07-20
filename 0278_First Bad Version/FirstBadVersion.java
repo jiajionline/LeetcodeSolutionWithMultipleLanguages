@@ -4,16 +4,16 @@
 // [l, R)
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
-        long l = 1;
-        long r = (long)n + 1;
+        long l = 1, r = (long)n + 1;
         while(l < r) {
-            long mid = (r-l)/2 + l;
-            if(isBadVersion((int)mid))
+            int mid = (int)((r-l)/2 + l);
+            if(isBadVersion(mid)){
                 r = mid;
-            else
-                l = mid + 1;
+            }else{
+                l = mid+1;
+            }
         }
-        
-        return l > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)l;
+
+        return (int)l;
     }
 }
