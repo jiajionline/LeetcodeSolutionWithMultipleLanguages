@@ -1,38 +1,26 @@
 class Solution {
     public String minWindow(String s, String t) {
-    if(s==null||s.isEmpty()||t==null||t.isEmpty()) return "";
-
-    String ans="";
-    int l=0, r=0, count=0, minLength=s.length() + 1;
-    int[] mapT=new int[256];
-    int[] mapS=new int[256];
-
-    for(int c=0; c < t.length(); c++) mapT[t.charAt(c)]++;
-
-    while(r<s.length()){
-        if(count<t.length()){
-            if(mapT[s.charAt(r)]>0){
-                mapS[s.charAt(r)]++;
-                if(mapS[s.charAt(r)]<=mapT[s.charAt(r)]){
-                    count++;
+        int[] charS = new int[128];
+        int[] charT = new int[128];
+        for(char c : t.toCharArray()) charT[c]++;
+        int l = 0, len = Integer.MAX_VALUE, start = 0;
+        for(int r = 0;r<s.length();r++) {
+            charS[s.charAt(r)]++;
+            while(include(charS, charT)) {
+                if(r-l+1 < len) {
+                    start = l;
+                    len = r-l+1;
                 }
+                charS[s.charAt(l++)]--;
             }
-            r++;
         }
-        while(count==t.length()){
-            if(r-l<minLength){
-                minLength=r-l; 
-                ans=s.substring(l,r);
-            }
-            
-            if(mapT[s.charAt(l)]>0){
-                mapS[s.charAt(l)]--;
-                if(mapS[s.charAt(l)]<mapT[s.charAt(l)]) count--;
-            }
-            
-            l++;
-        }
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
-    return ans;
-}
+
+    private boolean include(int[] charS, int[] charT) {
+        for(int i=0;i<charS.length;i++) {
+            if(charS[i] < charT[i]) return false;
+        }
+        return true;
+    }
 }
