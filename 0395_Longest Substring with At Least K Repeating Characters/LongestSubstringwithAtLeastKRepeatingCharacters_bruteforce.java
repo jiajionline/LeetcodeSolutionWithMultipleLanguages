@@ -1,22 +1,21 @@
 class Solution {
     public int longestSubstring(String s, int k) {
         if(s== null || s.length() < k) return 0;
-        
         int[] arr = new int[26];
-        int ans = 0;
+        int ans = 0, n = s.length();
         
-        for(int start = 0;start < s.length();start++) {
+        for(int l = 0; l < n; l++) {
             Arrays.fill(arr,0);
-            for(int end = start;end < s.length(); end++) {
-                arr[s.charAt(end)-'a']++;
+            for(int r = l;r < n; r++) {
+                arr[s.charAt(r)-'a']++;
                 if(isValid(arr,k)) {
-                    ans = Math.max(ans, end - start + 1);
+                    ans = Math.max(ans, r - l + 1);
                 }
             }
         }
         return ans;
     }
-    
+
     private boolean isValid(int[] arr, int k) {
         int letterCount = 0;
         int letterAtLeastK = 0;
