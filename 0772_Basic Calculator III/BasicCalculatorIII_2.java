@@ -18,7 +18,7 @@ class Solution {
                     stack.push(-num);
                 else if(operator == '*') 
                     stack.push(stack.pop() * num);
-                else
+                else if(operator == '/')
                     stack.push(stack.pop() / num);
                 
                 operator = c;
