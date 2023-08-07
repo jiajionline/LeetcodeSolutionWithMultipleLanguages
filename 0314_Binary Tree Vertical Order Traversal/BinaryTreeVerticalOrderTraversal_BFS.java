@@ -1,42 +1,33 @@
 class Solution {
-    private int mostLeftVertical = Integer.MAX_VALUE;
-    private int mostRightVertical = Integer.MIN_VALUE;
-
+    private int mostLeft = 0;
     public List<List<Integer>> verticalOrder(TreeNode root) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        traverse(root, map);
         List<List<Integer>> ans = new ArrayList<>();
-        if (root == null) {
-        return ans;
-        }
-
-        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
-        Queue<Pair<TreeNode, Integer>> queue = new LinkedList<>();
-        int column = 0;
-        queue.offer(new Pair(root, column));
-
-        while (!queue.isEmpty()) {
-            Pair<TreeNode, Integer> p = queue.poll();
-            TreeNode node = p.getKey();
-            column = p.getValue();
-            mostLeftVertical = Math.min(mostLeftVertical, column);
-            mostRightVertical = Math.max(mostRightVertical, column);
-            
-            if (node != null) {
-                if (!map.containsKey(column)) {
-                map.put(column, new ArrayList<Integer>());
-                }
-                map.get(column).add(node.val);
-
-                queue.offer(new Pair(node.left, column - 1));
-                queue.offer(new Pair(node.right, column + 1));
-            }
-        }
-
-        for(int i=mostLeftVertical;i<= mostRightVertical;i++) {
-            if(map.containsKey(i)) {
-                ans.add(map.get(i));
-            }
+        int count = map.size();
+        while(count-- > 0) {
+            ans.add(map.get(mostLeft++));
         }
 
         return ans;
+    }
+
+    private void traverse(TreeNode root,  Map<Integer, List<Integer>> map) {
+        if(root == null) return;
+        Queue<Pair<TreeNode,Integer>> q = new LinkedList<>();
+        q.offer(new Pair<TreeNode, Integer>(root, 0));
+        while(q.size() > 0) {
+            int count = q.size();
+            while(count-- > 0) {
+                Pair<TreeNode, Integer> pair = q.poll();
+                TreeNode n = pair.getKey();
+                int verticalLevel = pair.getValue();
+                mostLeft = Math.min(mostLeft, verticalLevel);
+                map.putIfAbsent(verticalLevel, new ArrayList<Integer>());
+                map.get(verticalLevel).add(n.val);
+                if(n.left != null) q.offer(new Pair<TreeNode, Integer>(n.left, verticalLevel-1));
+                if(n.right != null) q.offer(new Pair<TreeNode, Integer>(n.right, verticalLevel+1));
+            }
+        }
     }
 }
