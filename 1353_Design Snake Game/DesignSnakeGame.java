@@ -31,7 +31,7 @@ class SnakeGame {
         }
 
         // eat the food
-        if(_foodIndex >= 0 && _foodIndex < _food.length && _food[_foodIndex][0] == x && _food[_foodIndex][1] == y) {
+        if( _foodIndex < _food.length && _food[_foodIndex][0] == x && _food[_foodIndex][1] == y) {
             _foodIndex++;
             snake.add(0, new int[]{x, y});
         }else{
