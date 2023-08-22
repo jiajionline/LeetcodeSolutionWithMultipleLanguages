@@ -9,10 +9,10 @@ class Solution {
         int curSum = 0;
         for (int i = 0; i < nums.length; i++) {
             curSum += nums[i];
-            // only keey the mod
+            // only keep the mod
             curSum = curSum % k;
             
-            // (sum1 - sum2) % k == 0 ===> sum1 % k == sum2 % k
+            /// if sum1 % k == sum2 % k ⇒ (sum1 - sum2) % k == 0 ⇒   the sum of the elements of the subarray is a multiple of k
             if (map.containsKey(curSum)) {
                 if (i - map.get(curSum) > 1) {
                     return true;
