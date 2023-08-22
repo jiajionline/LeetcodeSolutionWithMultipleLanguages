@@ -5,6 +5,7 @@ class Solution {
         int prefix = 0;
         int ans = 0;
         for(int v : nums) {
+            // Take modulo twice to avoid negative remainders.
             prefix = (prefix + v % k + k) % k;
             ans += map.getOrDefault(prefix, 0);
             map.put(prefix, map.getOrDefault(prefix,0) + 1);
