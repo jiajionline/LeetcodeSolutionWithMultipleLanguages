@@ -15,7 +15,8 @@ public class Solution {
                 for(int l=0; l<= time-len;l++){
                     int r = l+len;
                     if(s > r || e < l) continue;
-                    if(s <= l && e >= r) dp[l][r] = 1;
+                    if(s <= l && e >= r) 
+                        dp[l][r] = 1;
                     else if(e >= r){
                         dp[l][r] = Math.min(dp[l][r], dp[l][s] + 1);
                     }else if(s <= l){
