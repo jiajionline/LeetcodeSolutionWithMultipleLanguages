@@ -9,20 +9,19 @@
 
 class Solution {
     public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
-        int m = binaryMatrix.dimensions().get(0);
-        int n = binaryMatrix.dimensions().get(1);
-        
-        int x = 0, y = n-1, ans = Integer.MAX_VALUE;
-        
+        List<Integer> dim = binaryMatrix.dimensions();
+        int m = dim.get(0), n = dim.get(1);
+        int ans = n;
+        int x = 0, y = n-1;
         while(x < m && y >= 0) {
-            if(binaryMatrix.get(x, y) == 1) {
+            if(binaryMatrix.get(x, y) == 1){
                 ans = Math.min(ans, y);
                 y--;
             }else{
                 x++;
             }
         }
-        
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return ans == n ? -1 : ans;
+
     }
 }
