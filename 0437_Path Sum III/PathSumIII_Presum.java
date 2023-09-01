@@ -1,11 +1,11 @@
 class Solution {
     private int ans = 0;
     public int pathSum(TreeNode root, int targetSum) {
-        pathSum(root, targetSum, 0, new HashMap<Integer,Integer>());
+        pathSum(root, targetSum, 0, new HashMap<Long,Integer>());
         return ans;
     }
     
-    private void pathSum(TreeNode node, int targetSum, int currSum, Map<Integer,Integer> map) {
+    private void pathSum(TreeNode node, long targetSum, long currSum, Map<Long,Integer> map) {
         if(node == null) return;
         
         currSum += node.val;
