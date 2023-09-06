@@ -6,10 +6,10 @@ class Solution {
         char[] GENES = new char[]{'A','C','G','T'};
         Set<String> banks = new HashSet<String>();
         for(String b : bank)  banks.add(b);
+        if(!banks.contains(end)) return -1;
         banks.add(start);
         
-        Set<String> visited = new HashSet();
-        DFS(banks, visited, start, 0, GENES, end);
+        DFS(banks, new HashSet(), start, 0, GENES, end);
         
         return ans == Integer.MAX_VALUE ? -1 : ans;
     }
@@ -26,13 +26,14 @@ class Solution {
         char[] chars = g.toCharArray();
         
         for(int i=0;i<chars.length;i++) {
+            char oldChar = chars[i];
             for(int j=0; j < GENES.length; j++) {
-                char oldChar = chars[i];
+                if(oldChar == GENES[j]) continue;
                 chars[i] = GENES[j];
                 String newGene = new String(chars);
                 DFS(banks, visited, newGene, mutations+1, GENES, end);
-                chars[i] = oldChar;
             }
+            chars[i] = oldChar;
         }
     }
 }
