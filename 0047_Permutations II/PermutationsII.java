@@ -18,7 +18,7 @@ class Solution {
             if(used[i]) continue;
             
             // Same number can be only used once at each depth.
-            // when a number has the same value with its previous, we can use this number only if his previous is used
+            // when a number has the same value with its previous, we can use this number only if his previous is used, you can't use current number if the previous not used.
             if(i>0 && nums[i] == nums[i-1] && !used[i-1]) continue;
             curr.add(nums[i]);
             used[i] = true;
