@@ -3,24 +3,26 @@ class Solution {
         ListNode preHead = new ListNode(-1);
         preHead.next = head;
         ListNode prev = preHead;
-        ListNode cur = prev.next;
-        int i = 1;
-        while(i < left) {
-            prev = cur;
-            cur = cur.next;
-            i++;
+        ListNode curr = prev.next;
+        int index = 1;
+        while(index < left) {
+            prev = curr;
+            curr = curr.next;
+            index++;
         }
-        
-        ListNode node = prev;
-        while(i++ <= right) {
-            ListNode next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
+
+        ListNode lastNodeBeforeReverse = prev;
+        while(index <= right) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            index++;
         }
-        
-        node.next.next = cur;
-        node.next = prev;
+
+        lastNodeBeforeReverse.next.next = curr;
+        lastNodeBeforeReverse.next = prev;
         return preHead.next;
+
     }
 }
