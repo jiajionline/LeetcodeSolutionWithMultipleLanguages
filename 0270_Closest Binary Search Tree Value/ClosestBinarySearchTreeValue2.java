@@ -8,7 +8,9 @@ class Solution {
     
     private void traverse(TreeNode node, double target) {
         if(node == null) return;
-        if(Math.abs(node.val - target) < v) {
+        if(Math.abs(node.val - target) == v) {
+            ans = Math.min(ans, node.val);
+        }else if(Math.abs(node.val - target) < v) {
             ans = node.val;
             v = Math.abs(node.val - target);
         }

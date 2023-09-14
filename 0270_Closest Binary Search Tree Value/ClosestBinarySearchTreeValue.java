@@ -1,21 +1,22 @@
 class Solution {
     public int closestValue(TreeNode root, double target) {
-        int ans = Integer.MAX_VALUE;
-        double closest = Double.MAX_VALUE;
+        double v = Double.MAX_VALUE;
+        int ans = 0;
         TreeNode p = root;
         while(p != null) {
-            if(Math.abs(target - p.val) < closest) {
+            double nodeValue = p.val;
+            if(Math.abs(nodeValue - target) == v) {
+                ans = Math.min(p.val, ans);
+            }else if(Math.abs(nodeValue - target) < v) {
                 ans = p.val;
-                closest = Math.abs(target - p.val);
+                v = Math.abs(nodeValue - target);
             }
-            
-            if(p.val >= target){
+            if(nodeValue >= target) {
                 p = p.left;
-            }else{
+            }else {
                 p = p.right;
             }
         }
-        
         return ans;
     }
 }
