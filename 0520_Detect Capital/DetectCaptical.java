@@ -1,14 +1,12 @@
 class Solution {
     public boolean detectCapitalUse(String word) {
-        boolean firstCapital = Character.isUpperCase(word.charAt(0));
-        int countCapital = 0;
-        
-        for(int i=0;i<word.length();i++)
-        {
-            char c = word.charAt(i);
-            if(Character.isUpperCase(c)) countCapital++;
+        int cntOfUpper = 0,  n = word.length();
+        for(char c : word.toCharArray()) {
+            if(Character.isUpperCase(c)){
+                cntOfUpper++;
+            }
         }
-        
-        return word.length() == countCapital || (firstCapital && countCapital == 1) || countCapital == 0;
+
+        return cntOfUpper == 0 || cntOfUpper == n ||  (cntOfUpper == 1 && Character.isUpperCase(word.charAt(0)));
     }
 }
