@@ -1,38 +1,33 @@
 class MapSum {
-    private Tire root;
+    private TireNode root;
     private Map<String,Integer> map;
     public MapSum() {
-        root = new Tire(0);
+        root = new TireNode(0);
         map = new HashMap<>();
     }
     
     public void insert(String key, int val) {
-        int offset = val;
-        if(map.containsKey(key)) {
-            offset = val - map.get(key);
-        }
-        
+        int offset = val - map.getOrDefault(key, 0);
         map.put(key, val);
         
-        Tire p = root;
+        TireNode p = root;
         
-        for(Character c : key.toCharArray()) {
-            if(p.nodes[c-'a'] == null) 
-                p.nodes[c-'a'] = new Tire(offset);
+        for(char c : key.toCharArray()) {
+            if(p.children[c-'a'] == null) 
+                p.children[c-'a'] = new TireNode(offset);
             else {
-                p.nodes[c-'a'].val += offset;
+                p.children[c-'a'].val += offset;
             }
-            p = p.nodes[c-'a'];
+            p = p.children[c-'a'];
         }
-        
     }
     
 	public int sum(String prefix) {
-		Tire p = root;
+		TireNode p = root;
 		int sum = 0;
-		for (Character c : prefix.toCharArray()) {
-			if (p.nodes[c - 'a'] != null) {
-				p = p.nodes[c - 'a'];
+		for (char c : prefix.toCharArray()) {
+			if (p.children[c - 'a'] != null) {
+				p = p.children[c - 'a'];
                 sum = p.val;
 			} else {
 				return 0;
@@ -42,10 +37,10 @@ class MapSum {
 		return sum;
 	}
     
-	private class Tire {
-	    Tire[] nodes = new Tire[26];
+	private class TireNode {
+	    TireNode[] children = new TireNode[26];
 	    int val;
-	    public Tire(int v) {
+	    public TireNode(int v) {
 	        val = v;
 	    }
 	}
