@@ -8,16 +8,17 @@ class Solution {
         }
 
         int[][] DP = new int[n+2][n+2];
-        //length of sub ballons start from 1
-        for(int l = 1;l <= n; l++){
-            for(int i=1; i + l <= n+1;i++){
-                int j = i + l - 1;
+        //length of sub balloons start from 1
+        for(int len = 1;len <= n; len++){
+            for(int l=1; l + len <= n+1;l++){
+                int r = l + len - 1;
                 int most = 0;
-                for(int k = i; k<= j; k++){
-                    most = Math.max(most, DP[i][k-1] + vals[i-1] * vals[k] * vals[j+1] + DP[k+1][j]);
+                for(int k = l; k<= r; k++){
+                    most = Math.max(most, DP[l][k-1] + vals[l-1] * vals[k] * vals[r+1] + DP[k+1][r]);
                 } 
 
-                DP[i][j] = most;
+
+                DP[l][r] = most;
             }
         }
 
