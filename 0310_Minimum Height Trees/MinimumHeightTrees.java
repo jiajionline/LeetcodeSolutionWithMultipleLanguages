@@ -49,27 +49,4 @@ class Solution {
         }
         return graph;
     }
-
-    private int height(Map<Integer, List<Integer>> graph, int node) {
-        if(!graph.containsKey(node)) return Integer.MAX_VALUE;
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(node);
-        int height = 0;
-        Set<Integer> visited = new HashSet<>();
-        
-        while(q.size() > 0) {
-            int size = q.size();
-            height++;
-            while(size-- > 0) {
-                int currNode = q.poll();
-                visited.add(currNode);
-                for(int nextNode : graph.get(currNode)){
-                    if(visited.contains(nextNode)) continue;
-                    q.offer(nextNode);
-                }
-            }
-        }
-
-        return height;
-    }
 }
